@@ -13,7 +13,5 @@ def main():
     parser.add_argument('--profile', dest='profile', action='store',default="default", help='profile')
     args = parser.parse_args()
 
-
-
 if __name__ == '__main__':
     main()
