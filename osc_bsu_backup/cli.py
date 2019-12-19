@@ -7,8 +7,9 @@ from osc_bsu_backup import __version__
 
 logger = setup_logging(__name__)
 
+
 def main():
-    logger.info("osc_bsu_backup")
+    logger.info("osc_bsu_backup: %s", __version__)
 
     parser = argparse.ArgumentParser(description='osc-ebs-backup')
     parser.add_argument('--instance-by-id', dest='instance_id', action='store', 
@@ -23,6 +24,8 @@ def main():
             help='endpoint')
     parser.add_argument('--profile', dest='profile', action='store',default="default", 
             help='profile')
+    parser.add_argument('--debug', dest='debug', action='store_true',default=False, 
+            help='enable debug')
     args = parser.parse_args()
 
     if args.instance_tags and len(args.instance_tags.split(":")) != 2:
@@ -30,11 +33,12 @@ def main():
     elif not args.instance_id and not args.instance_tags:
         parser.error('please use --instance-by-id or --instance-by-tags')
 
+    if args.debug:
+        setup_logging(level=logging.DEBUG)
+
     back = BsuBackup(args.profile, args.region, args.endpoint)
 
     back.auth()
-
-    print(__version__)
 
     if args.instance_id:
         res = back.find_instance_by_id(args.instance_id)
