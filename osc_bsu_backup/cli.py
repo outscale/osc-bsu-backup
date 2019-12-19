@@ -3,6 +3,8 @@ import logging
 from osc_bsu_backup.bsu_backup import BsuBackup
 from osc_bsu_backup.utils import setup_logging
 
+from osc_bsu_backup import __version__
+
 logger = setup_logging(__name__)
 
 def main():
@@ -23,19 +25,25 @@ def main():
             help='profile')
     args = parser.parse_args()
 
+    if args.instance_tags and len(args.instance_tags.split(":")) != 2:
+            parser.error('please use the format Key:Value for tags: --instance-by-tags Name:vm-1')
+    elif not args.instance_id and not args.instance_tags:
+        parser.error('please use --instance-by-id or --instance-by-tags')
+
     back = BsuBackup(args.profile, args.region, args.endpoint)
 
     back.auth()
-    
+
+    print(__version__)
 
     if args.instance_id:
-        back.find_instance_by_id(args.instance_id)
+        res = back.find_instance_by_id(args.instance_id)
     elif args.instance_tags:
-        if len(args.instance_tags.split(":")) != 2:
-            parser.error('please use the format Key:Value for tags: --instance-by-tags Name:vm-1')
-        back.find_instances_by_tags(args.instance_tags)
-    else:
-        parser.error('please use --instance-by-id or --instance-by-tags')
+        res = back.find_instances_by_tags(args.instance_tags)
+
+    back.rotate_snapshots(res, args.rotate)
+
+    back.create_snapshots(res)
 
 if __name__ == '__main__':
     main()
