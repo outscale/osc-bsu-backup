@@ -1,6 +1,7 @@
 import logging
 import sys
 
+
 def setup_logging(name=None, level=logging.INFO):
     logger = logging.getLogger(name)
     stream = logging.StreamHandler(sys.stdout)
