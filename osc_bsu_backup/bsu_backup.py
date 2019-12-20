@@ -1,4 +1,5 @@
 import boto3
+import botocore
 from osc_bsu_backup.utils import setup_logging
 from osc_bsu_backup.error import InputError
 
@@ -102,9 +103,16 @@ class BsuBackup:
                             snap["SnapshotId"],
                             snap["StartTime"].strftime("%m/%d/%Y, %H:%M:%S"),
                         )
-                        del_snap = self.conn.delete_snapshot(
-                            SnapshotId=snap["SnapshotId"]
-                        )
+
+                        try:
+                            del_snap = self.conn.delete_snapshot(
+                                SnapshotId=snap["SnapshotId"]
+                            )
+                        except botocore.exceptions.ClientError as e:
+                            if e.response["Error"]["Code"] == "InvalidSnapshot.InUse":
+                                logger.error(e)
+                            else:
+                                raise e
                     else:
                         logger.info(
                             "snaps to keep: %s %s %s",
