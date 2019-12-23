@@ -7,5 +7,8 @@ virtualenv:
 develop: virtualenv
 	./venv/bin/python setup.py develop
 
+wheel: virtualenv
+	./venv/bin/python setup.py bdist_wheel
+
 format: virtualenv
 	./venv/bin/pip install black && ./venv/bin/black $(PYTHONFILES)
