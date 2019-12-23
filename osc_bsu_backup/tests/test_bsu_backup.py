@@ -1,7 +1,7 @@
 import unittest
 import logging
 from unittest.mock import patch
-import botocore
+import boto3
 
 import osc_bsu_backup.bsu_backup as bsu
 from osc_bsu_backup.error import InputError
@@ -33,9 +33,11 @@ class TestBsuBackupMethods(unittest.TestCase):
             "https://fcu.cn-southeast-1.outscale.hk",
         )
 
-    def test_auth(self):
+    @patch("osc_bsu_backup.bsu_backup.boto3")
+    def test_auth(self, boto3):
         bsu_ = bsu.BsuBackup(region="eu-west-2", profile="azrzrgzefv", endpoint=None)
-        self.assertRaises(botocore.exceptions.ProfileNotFound, bsu_.auth)
+        bsu_.auth()
+        self.assertIsInstance(bsu_.conn, object)
 
 
 if __name__ == "__main__":
