@@ -24,7 +24,7 @@ def main():
         "--instance-by-tags",
         dest="instance_tags",
         action="store",
-        help="instances tags to look for use the format Key:Value",
+        help="instances tags to look for, use the format Key:Value",
     )
     parser.add_argument(
         "--rotate",
@@ -41,7 +41,7 @@ def main():
         "--endpoint", dest="endpoint", default=None, action="store", help="endpoint"
     )
     parser.add_argument(
-        "--profile", dest="profile", action="store", default="default", help="profile"
+        "--profile", dest="profile", action="store", default="default", help="aws profile to use, ~/.aws/credentials"
     )
     parser.add_argument(
         "--debug", dest="debug", action="store_true", default=False, help="enable debug"
