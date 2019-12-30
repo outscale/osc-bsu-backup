@@ -7,6 +7,9 @@ virtualenv:
 develop: virtualenv
 	./venv/bin/python setup.py develop
 
+tests: virtualenv
+	./venv/bin/python -m unittest -v
+
 wheel: virtualenv
 	./venv/bin/python setup.py bdist_wheel
 
