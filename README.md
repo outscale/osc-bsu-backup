@@ -1,22 +1,22 @@
-#osc-bsu-backup
+# osc-bsu-backup
 
-##Introduction
+## Introduction
 
 cli tool to easily schedule instance snapshots and rotate it on Outscale Cloud
 
-##Install
+## Install
 
 ```bash
 python3 setup.py install
 ```
 
-##How to build
+## How to build
 
 ```bash
 make develop
 ```
 
-##Usage
+## Usage
 
 ```bash
 /usr/local/outscale/virtualenv/bin/osc-bsu-backup --help
@@ -41,7 +41,7 @@ optional arguments:
   --debug               enable debug
 ```
 
-##How to use
+## How to use
 
 this tool is intend to be use with cron and aws profile, here is an example of setup
 
