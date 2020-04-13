@@ -1,6 +1,6 @@
 import argparse
 import logging
-from osc_bsu_backup.bsu_backup import BsuBackup
+import osc_bsu_backup.bsu_backup as bsu_backup
 from osc_bsu_backup.utils import setup_logging
 
 from osc_bsu_backup import __version__
@@ -62,18 +62,16 @@ def main():
     if args.debug:
         setup_logging(level=logging.DEBUG)
 
-    back = BsuBackup(args.profile, args.region, args.endpoint)
-
-    back.auth()
+    conn = bsu_backup.auth(args.profile, args.region, args.endpoint)
 
     if args.instance_id:
-        res = back.find_instance_by_id(args.instance_id)
+        res = bsu_backup.find_instance_by_id(conn, args.instance_id)
     elif args.instance_tags:
-        res = back.find_instances_by_tags(args.instance_tags)
+        res = bsu_backup.find_instances_by_tags(conn, args.instance_tags)
 
-    back.rotate_snapshots(res, args.rotate)
+    bsu_backup.rotate_snapshots(conn, res, args.rotate)
 
-    back.create_snapshots(res)
+    bsu_backup.create_snapshots(conn, res)
 
 
 if __name__ == "__main__":
