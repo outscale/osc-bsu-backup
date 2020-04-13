@@ -1,0 +1,108 @@
+{
+    "Reservations": [
+        {
+            "Groups": [
+                {
+                    "GroupName": "priv",
+                    "GroupId": "sg-0fea0dac"
+                }
+            ],
+            "Instances": [
+                {
+                    "AmiLaunchIndex": 0,
+                    "ImageId": "ami-b0d57010",
+                    "InstanceId": "i-e6b7ab04",
+                    "InstanceType": "t2.nano",
+                    "KernelId": "",
+                    "KeyName": "work",
+                    "LaunchTime": "2020-04-09T13:28:58.721Z",
+                    "Monitoring": {
+                        "State": "disabled"
+                    },
+                    "Placement": {
+                        "AvailabilityZone": "eu-west-2a",
+                        "GroupName": "",
+                        "Tenancy": "default"
+                    },
+                    "PrivateDnsName": "ip-10-0-2-10.eu-west-2.compute.internal",
+                    "PrivateIpAddress": "10.0.2.10",
+                    "ProductCodes": [],
+                    "PublicDnsName": "",
+                    "State": {
+                        "Code": 16,
+                        "Name": "running"
+                    },
+                    "SubnetId": "subnet-4c66da82",
+                    "VpcId": "vpc-ad730e33",
+                    "Architecture": "x86_64",
+                    "BlockDeviceMappings": [
+                        {
+                            "DeviceName": "/dev/sda1",
+                            "Ebs": {
+                                "AttachTime": "2020-04-09T13:28:58.721Z",
+                                "DeleteOnTermination": true,
+                                "Status": "attached",
+                                "VolumeId": "vol-a87f91c1"
+                            }
+                        }
+                    ],
+                    "ClientToken": "",
+                    "EbsOptimized": false,
+                    "Hypervisor": "xen",
+                    "NetworkInterfaces": [
+                        {
+                            "Attachment": {
+                                "AttachTime": "2020-04-09T13:28:58.721Z",
+                                "AttachmentId": "eni-attach-1fb7811e",
+                                "DeleteOnTermination": true,
+                                "DeviceIndex": 0,
+                                "Status": "attached"
+                            },
+                            "Description": "Primary network interface",
+                            "Groups": [
+                                {
+                                    "GroupName": "priv",
+                                    "GroupId": "sg-0fea0dac"
+                                }
+                            ],
+                            "MacAddress": "aa:d6:af:71:91:f6",
+                            "NetworkInterfaceId": "eni-a8213f11",
+                            "OwnerId": "763630846467",
+                            "PrivateDnsName": "ip-10-0-2-10.eu-west-2.compute.internal",
+                            "PrivateIpAddress": "10.0.2.10",
+                            "PrivateIpAddresses": [
+                                {
+                                    "Primary": true,
+                                    "PrivateDnsName": "ip-10-0-2-10.eu-west-2.compute.internal",
+                                    "PrivateIpAddress": "10.0.2.10"
+                                }
+                            ],
+                            "SourceDestCheck": true,
+                            "Status": "in-use",
+                            "SubnetId": "subnet-4c66da82",
+                            "VpcId": "vpc-ad730e33"
+                        }
+                    ],
+                    "RootDeviceName": "/dev/sda1",
+                    "RootDeviceType": "ebs",
+                    "SecurityGroups": [
+                        {
+                            "GroupName": "priv",
+                            "GroupId": "sg-0fea0dac"
+                        }
+                    ],
+                    "SourceDestCheck": true,
+                    "Tags": [
+                        {
+                            "Key": "Name",
+                            "Value": "test1"
+                        }
+                    ],
+                    "VirtualizationType": "hvm"
+                }
+            ],
+            "OwnerId": "763630846467",
+            "ReservationId": "r-390600af"
+        }
+    ]
+}
