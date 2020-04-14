@@ -141,3 +141,360 @@ volumes = {
         }
     ]
 }
+
+snapshots1 = {
+    "Snapshots": [
+        {
+            "Description": "osc-bsu-backup 0.1",
+            "Encrypted": False,
+            "OwnerId": "763630846467",
+            "Progress": "100%",
+            "SnapshotId": "snap-cf4748a5",
+            "StartTime": "2019-12-19T16:02:22.204Z",
+            "State": "completed",
+            "VolumeId": "vol-59b94d63",
+            "VolumeSize": 10,
+            "Tags": []
+        },
+        {
+            "Description": "osc-bsu-backup 0.0.1",
+            "Encrypted": False,
+            "OwnerId": "763630846467",
+            "Progress": "100%",
+            "SnapshotId": "snap-04fd92f4",
+            "StartTime": "2019-12-19T16:56:20.567Z",
+            "State": "completed",
+            "VolumeId": "vol-59b94d63",
+            "VolumeSize": 10,
+            "Tags": []
+        },
+        {
+            "Description": "osc-bsu-backup 0.0.1",
+            "Encrypted": False,
+            "OwnerId": "763630846467",
+            "Progress": "100%",
+            "SnapshotId": "snap-30e1c236",
+            "StartTime": "2019-12-19T16:50:09.591Z",
+            "State": "completed",
+            "VolumeId": "vol-59b94d63",
+            "VolumeSize": 10,
+            "Tags": []
+        },
+        {
+            "Description": "osc-bsu-backup 0.0.1",
+            "Encrypted": False,
+            "OwnerId": "763630846467",
+            "Progress": "100%",
+            "SnapshotId": "snap-d5caf847",
+            "StartTime": "2019-12-19T16:53:04.271Z",
+            "State": "completed",
+            "VolumeId": "vol-59b94d63",
+            "VolumeSize": 10,
+            "Tags": []
+        },
+        {
+            "Description": "osc-bsu-backup 0.0.1",
+            "Encrypted": False,
+            "OwnerId": "763630846467",
+            "Progress": "100%",
+            "SnapshotId": "snap-f820da70",
+            "StartTime": "2019-12-19T16:57:03.137Z",
+            "State": "completed",
+            "VolumeId": "vol-59b94d63",
+            "VolumeSize": 10,
+            "Tags": []
+        },
+        {
+            "Description": "osc-bsu-backup 0.0.1",
+            "Encrypted": False,
+            "OwnerId": "763630846467",
+            "Progress": "100%",
+            "SnapshotId": "snap-e5b47810",
+            "StartTime": "2019-12-19T16:57:44.663Z",
+            "State": "completed",
+            "VolumeId": "vol-59b94d63",
+            "VolumeSize": 10,
+            "Tags": []
+        },
+        {
+            "Description": "osc-bsu-backup 0.0.1",
+            "Encrypted": False,
+            "OwnerId": "763630846467",
+            "Progress": "100%",
+            "SnapshotId": "snap-16959493",
+            "StartTime": "2019-12-19T17:21:06.316Z",
+            "State": "completed",
+            "VolumeId": "vol-59b94d63",
+            "VolumeSize": 10,
+            "Tags": []
+        },
+        {
+            "Description": "osc-bsu-backup 0.0.1",
+            "Encrypted": False,
+            "OwnerId": "763630846467",
+            "Progress": "100%",
+            "SnapshotId": "snap-a8fa23e2",
+            "StartTime": "2019-12-19T17:15:09.910Z",
+            "State": "completed",
+            "VolumeId": "vol-59b94d63",
+            "VolumeSize": 10,
+            "Tags": []
+        },
+        {
+            "Description": "osc-bsu-backup 0.0.1",
+            "Encrypted": False,
+            "OwnerId": "763630846467",
+            "Progress": "100%",
+            "SnapshotId": "snap-14f3772c",
+            "StartTime": "2019-12-19T17:18:27.772Z",
+            "State": "completed",
+            "VolumeId": "vol-59b94d63",
+            "VolumeSize": 10,
+            "Tags": []
+        },
+        {
+            "Description": "osc-bsu-backup 0.0.1",
+            "Encrypted": False,
+            "OwnerId": "763630846467",
+            "Progress": "100%",
+            "SnapshotId": "snap-e9a6aae5",
+            "StartTime": "2019-12-19T17:18:54.429Z",
+            "State": "completed",
+            "VolumeId": "vol-59b94d63",
+            "VolumeSize": 10,
+            "Tags": []
+        },
+        {
+            "Description": "osc-bsu-backup 0.0.1",
+            "Encrypted": False,
+            "OwnerId": "763630846467",
+            "Progress": "100%",
+            "SnapshotId": "snap-70be5243",
+            "StartTime": "2019-12-19T17:20:23.850Z",
+            "State": "completed",
+            "VolumeId": "vol-59b94d63",
+            "VolumeSize": 10,
+            "Tags": []
+        }
+    ]
+}
+
+snapshots2 = {
+    "Snapshots": [
+        {
+            "Description": "osc-bsu-backup 0.1",
+            "Encrypted": False,
+            "OwnerId": "763630846467",
+            "Progress": "100%",
+            "SnapshotId": "snap-8f3436c0",
+            "StartTime": "2019-12-19T16:02:21.165Z",
+            "State": "completed",
+            "VolumeId": "vol-640141cf",
+            "VolumeSize": 10,
+            "Tags": []
+        },
+        {
+            "Description": "osc-bsu-backup 0.0.1",
+            "Encrypted": False,
+            "OwnerId": "763630846467",
+            "Progress": "100%",
+            "SnapshotId": "snap-e6996c10",
+            "StartTime": "2019-12-19T16:50:08.496Z",
+            "State": "completed",
+            "VolumeId": "vol-640141cf",
+            "VolumeSize": 10,
+            "Tags": []
+        },
+        {
+            "Description": "osc-bsu-backup 0.0.1",
+            "Encrypted": False,
+            "OwnerId": "763630846467",
+            "Progress": "100%",
+            "SnapshotId": "snap-fa25ee50",
+            "StartTime": "2019-12-19T16:53:02.217Z",
+            "State": "completed",
+            "VolumeId": "vol-640141cf",
+            "VolumeSize": 10,
+            "Tags": []
+        },
+        {
+            "Description": "osc-bsu-backup 0.0.1",
+            "Encrypted": False,
+            "OwnerId": "763630846467",
+            "Progress": "100%",
+            "SnapshotId": "snap-5569bbaa",
+            "StartTime": "2019-12-19T17:21:04.153Z",
+            "State": "completed",
+            "VolumeId": "vol-640141cf",
+            "VolumeSize": 10,
+            "Tags": []
+        },
+        {
+            "Description": "osc-bsu-backup 0.0.1",
+            "Encrypted": False,
+            "OwnerId": "763630846467",
+            "Progress": "100%",
+            "SnapshotId": "snap-9c3c5d34",
+            "StartTime": "2019-12-19T16:56:18.452Z",
+            "State": "completed",
+            "VolumeId": "vol-640141cf",
+            "VolumeSize": 10,
+            "Tags": []
+        },
+        {
+            "Description": "osc-bsu-backup 0.0.1",
+            "Encrypted": False,
+            "OwnerId": "763630846467",
+            "Progress": "100%",
+            "SnapshotId": "snap-7729b15f",
+            "StartTime": "2019-12-19T16:57:00.779Z",
+            "State": "completed",
+            "VolumeId": "vol-640141cf",
+            "VolumeSize": 10,
+            "Tags": []
+        },
+        {
+            "Description": "osc-bsu-backup 0.0.1",
+            "Encrypted": False,
+            "OwnerId": "763630846467",
+            "Progress": "100%",
+            "SnapshotId": "snap-ecead238",
+            "StartTime": "2019-12-19T16:57:42.726Z",
+            "State": "completed",
+            "VolumeId": "vol-640141cf",
+            "VolumeSize": 10,
+            "Tags": []
+        },
+        {
+            "Description": "osc-bsu-backup 0.0.1",
+            "Encrypted": False,
+            "OwnerId": "763630846467",
+            "Progress": "100%",
+            "SnapshotId": "snap-445be4c7",
+            "StartTime": "2019-12-19T17:15:08.852Z",
+            "State": "completed",
+            "VolumeId": "vol-640141cf",
+            "VolumeSize": 10,
+            "Tags": []
+        },
+        {
+            "Description": "osc-bsu-backup 0.0.1",
+            "Encrypted": False,
+            "OwnerId": "763630846467",
+            "Progress": "100%",
+            "SnapshotId": "snap-e88add53",
+            "StartTime": "2019-12-19T17:18:52.419Z",
+            "State": "completed",
+            "VolumeId": "vol-640141cf",
+            "VolumeSize": 10,
+            "Tags": []
+        },
+        {
+            "Description": "osc-bsu-backup 0.0.1",
+            "Encrypted": False,
+            "OwnerId": "763630846467",
+            "Progress": "100%",
+            "SnapshotId": "snap-5e2e73c4",
+            "StartTime": "2019-12-19T17:18:26.086Z",
+            "State": "completed",
+            "VolumeId": "vol-640141cf",
+            "VolumeSize": 10,
+            "Tags": []
+        },
+        {
+            "Description": "osc-bsu-backup 0.0.1",
+            "Encrypted": False,
+            "OwnerId": "763630846467",
+            "Progress": "100%",
+            "SnapshotId": "snap-11d38c47",
+            "StartTime": "2019-12-19T17:19:49.081Z",
+            "State": "completed",
+            "VolumeId": "vol-640141cf",
+            "VolumeSize": 10,
+            "Tags": []
+        },
+        {
+            "Description": "osc-bsu-backup 0.0.1",
+            "Encrypted": False,
+            "OwnerId": "763630846467",
+            "Progress": "100%",
+            "SnapshotId": "snap-f3338f81",
+            "StartTime": "2019-12-19T17:20:21.762Z",
+            "State": "completed",
+            "VolumeId": "vol-640141cf",
+            "VolumeSize": 10,
+            "Tags": []
+        }
+    ]
+}
+
+create_snapshot1 = {
+    "Description": "",
+    "Encrypted": False,
+    "OwnerId": "763630846467",
+    "Progress": "0%",
+    "SnapshotId": "snap-91c8d227",
+    "StartTime": "2020-04-14T18:32:43.756Z",
+    "State": "in-queue",
+    "VolumeId": "vol-56d30e10",
+    "VolumeSize": 10
+}
+
+snapshot_completed1 = {
+    "Snapshots": [
+        {
+            "Description": "",
+            "Encrypted": False,
+            "OwnerId": "763630846467",
+            "Progress": "100%",
+            "SnapshotId": "snap-91c8d227",
+            "StartTime": "2020-04-14T18:32:43.756Z",
+            "State": "completed",
+            "VolumeId": "vol-56d30e10",
+            "VolumeSize": 10,
+            "Tags": []
+        }
+    ]
+}
+
+create_snapshot2 = {
+    "Description": "",
+    "Encrypted": False,
+    "OwnerId": "763630846467",
+    "Progress": "0%",
+    "SnapshotId": "snap-f3338f81",
+    "StartTime": "2020-04-14T18:32:43.756Z",
+    "State": "in-queue",
+    "VolumeId": "vol-640141cf",
+    "VolumeSize": 10
+}
+
+snapshot_completed2 = {
+    "Snapshots": [
+        {
+            "Description": "",
+            "Encrypted": False,
+            "OwnerId": "763630846467",
+            "Progress": "100%",
+            "SnapshotId": "snap-f3338f81",
+            "StartTime": "2020-04-14T18:32:43.756Z",
+            "State": "completed",
+            "VolumeId": "vol-640141cf",
+            "VolumeSize": 10,
+            "Tags": []
+        },
+        {
+            "Description": "",
+            "Encrypted": False,
+            "OwnerId": "763630846467",
+            "Progress": "100%",
+            "SnapshotId": "snap-91c8d227",
+            "StartTime": "2020-04-14T18:32:43.756Z",
+            "State": "completed",
+            "VolumeId": "vol-56d30e10",
+            "VolumeSize": 10,
+            "Tags": []
+        }
+
+    ]
+}
