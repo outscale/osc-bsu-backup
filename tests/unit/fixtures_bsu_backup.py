@@ -1,4 +1,4 @@
-{
+instances = {
     "Reservations": [
         {
             "Groups": [
@@ -40,21 +40,21 @@
                             "DeviceName": "/dev/sda1",
                             "Ebs": {
                                 "AttachTime": "2020-04-09T13:28:58.721Z",
-                                "DeleteOnTermination": true,
+                                "DeleteOnTermination": True,
                                 "Status": "attached",
                                 "VolumeId": "vol-a87f91c1"
                             }
                         }
                     ],
                     "ClientToken": "",
-                    "EbsOptimized": false,
+                    "EbsOptimized": False,
                     "Hypervisor": "xen",
                     "NetworkInterfaces": [
                         {
                             "Attachment": {
                                 "AttachTime": "2020-04-09T13:28:58.721Z",
                                 "AttachmentId": "eni-attach-1fb7811e",
-                                "DeleteOnTermination": true,
+                                "DeleteOnTermination": True,
                                 "DeviceIndex": 0,
                                 "Status": "attached"
                             },
@@ -72,12 +72,12 @@
                             "PrivateIpAddress": "10.0.2.10",
                             "PrivateIpAddresses": [
                                 {
-                                    "Primary": true,
+                                    "Primary": True,
                                     "PrivateDnsName": "ip-10-0-2-10.eu-west-2.compute.internal",
                                     "PrivateIpAddress": "10.0.2.10"
                                 }
                             ],
-                            "SourceDestCheck": true,
+                            "SourceDestCheck": True,
                             "Status": "in-use",
                             "SubnetId": "subnet-4c66da82",
                             "VpcId": "vpc-ad730e33"
@@ -91,7 +91,7 @@
                             "GroupId": "sg-0fea0dac"
                         }
                     ],
-                    "SourceDestCheck": true,
+                    "SourceDestCheck": True,
                     "Tags": [
                         {
                             "Key": "Name",
@@ -103,6 +103,41 @@
             ],
             "OwnerId": "763630846467",
             "ReservationId": "r-390600af"
+        }
+    ]
+}
+
+volumes = {
+    "Volumes": [
+        {
+            "Attachments": [
+                {
+                    "AttachTime": "2019-10-08T17:14:52.314Z",
+                    "Device": "/dev/sda1",
+                    "InstanceId": "i-8c1d8798",
+                    "State": "attached",
+                    "VolumeId": "vol-a24fffdc",
+                    "DeleteOnTermination": False
+                }
+            ],
+            "AvailabilityZone": "eu-west-2a",
+            "CreateTime": "2017-08-10T17:34:59.644Z",
+            "Size": 10,
+            "SnapshotId": "snap-d1c97efa",
+            "State": "in-use",
+            "VolumeId": "vol-a24fffdc",
+            "Tags": [
+                {
+                    "Key": "Name",
+                    "Value": "test1"
+                },
+                {
+                    "Key": "project",
+                    "Value": "test2"
+                }
+            ],
+
+            "VolumeType": "standard"
         }
     ]
 }
