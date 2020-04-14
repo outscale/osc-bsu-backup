@@ -134,7 +134,7 @@ def rotate_snapshots(conn, volumes, rotate=10):
             Filters=[{"Name": "volume-id", "Values": [vol]}]
         )
 
-        if len(snaps["Snapshots"]) > rotate:
+        if len(snaps["Snapshots"]) > rotate and rotate > 1:
             snaps["Snapshots"].sort(key=lambda x: x["StartTime"], reverse=True)
 
             for i, snap in enumerate(snaps["Snapshots"], start=0):
@@ -143,7 +143,7 @@ def rotate_snapshots(conn, volumes, rotate=10):
                         "deleting this snap: %s %s %s",
                         vol,
                         snap["SnapshotId"],
-                        snap["StartTime"].strftime("%m/%d/%Y, %H:%M:%S"),
+                        str(snap["StartTime"]),
                     )
 
                     try:
@@ -158,11 +158,11 @@ def rotate_snapshots(conn, volumes, rotate=10):
                         "snaps to keep: %s %s %s",
                         vol,
                         snap["SnapshotId"],
-                        snap["StartTime"].strftime("%m/%d/%Y, %H:%M:%S"),
+                        str(snap["StartTime"]),
                     )
 
 
-def create_snapshots(conn, res):
+def create_snapshots(conn, volumes):
     logger.info("create_snapshot")
 
     snaps = []
