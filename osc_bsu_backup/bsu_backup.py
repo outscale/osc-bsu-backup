@@ -41,6 +41,18 @@ def auth(profile, region, endpoint=None):
     return conn
 
 
+def find_volumes(res):
+    for reservation in res["Reservations"]:
+        for instance in reservation["Instances"]:
+            for vol in instance["BlockDeviceMappings"]:
+                logger.info(
+                    "volume found: %s %s",
+                    instance["InstanceId"],
+                    vol["Ebs"]["VolumeId"],
+                )
+                yield vol["Ebs"]["VolumeId"]
+
+
 def find_instance_by_id(conn, id):
     logger.info("find the instance by id: %s", id)
 
@@ -50,10 +62,14 @@ def find_instance_by_id(conn, id):
         for reservation in reservations["Reservations"]:
             for instance in reservation["Instances"]:
                 logger.info(
-                        "instance found: %s %s", instance["InstanceId"], instance["Tags"]
-                        )
+                    "instance found: %s %s", instance["InstanceId"], instance["Tags"]
+                )
 
-    return reservations
+        return find_volumes(reservations)
+    else:
+        logger.warning("instance not found: %s", id)
+        return
+
 
 def find_instances_by_tags(conn, tags):
     logger.info("find the instance by tags: %s", tags)
@@ -68,29 +84,52 @@ def find_instances_by_tags(conn, tags):
         for reservation in reservations["Reservations"]:
             for instance in reservation["Instances"]:
                 logger.info(
-                        "instance found: %s %s", instance["InstanceId"], instance["Tags"]
-                        )
-
-    return reservations
-
-
-def find_volumes(res):
-    for reservation in res["Reservations"]:
-        for instance in reservation["Instances"]:
-            for vol in instance["BlockDeviceMappings"]:
-                logger.info(
-                    "volume found: %s %s",
-                    instance["InstanceId"],
-                    vol["Ebs"]["VolumeId"],
+                    "instance found: %s %s", instance["InstanceId"], instance["Tags"]
                 )
-                yield vol["Ebs"]["VolumeId"]
+
+        return find_volumes(reservations)
+    else:
+        logger.warning("instances not found: %s", tags)
+        return
 
 
-def rotate_snapshots(conn, res, rotate=10):
+def find_volumes_by_tags(conn, tags):
+    logger.info("find the volume by tags: %s", tags)
+    tag_key = tags.split(":")[0]
+    tag_value = tags.split(":")[1]
+
+    vol = conn.describe_volumes(
+        Filters=[{"Name": "tag:{}".format(tag_key), "Values": [tag_value]}]
+    )
+
+    if len(vol["Volumes"]) != 0:
+        for vol in vol["Volumes"]:
+            logger.info("volume found: %s %s", vol["VolumeId"], vol["Tags"])
+            yield vol["VolumeId"]
+    else:
+        logger.warning("volumes not found: %s", tags)
+        return
+
+
+def find_volume_by_id(conn, id):
+    logger.info("find the volume by id: %s", id)
+
+    vol = conn.describe_volumes(VolumeIds=[id])
+
+    if len(vol["Volumes"]) != 0:
+        for vol in vol["Volumes"]:
+            logger.info("volume found: %s %s", vol["VolumeId"], vol["Tags"])
+            yield vol["VolumeId"]
+    else:
+        logger.warning("volumes not found: %s", id)
+        return
+
+
+def rotate_snapshots(conn, volumes, rotate=10):
     logger.info("rotate_snapshot: %d", rotate)
     del_snaps = []
 
-    for vol in find_volumes(res):
+    for vol in volumes:
         snaps = conn.describe_snapshots(
             Filters=[{"Name": "volume-id", "Values": [vol]}]
         )
@@ -128,7 +167,7 @@ def create_snapshots(conn, res):
 
     snaps = []
 
-    for vol in find_volumes(res):
+    for vol in volumes:
         snap = conn.create_snapshot(
             Description="osc-bsu-backup {}".format(__version__), VolumeId=vol
         )

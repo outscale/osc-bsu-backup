@@ -21,10 +21,19 @@ def main():
         help="instance to backup",
     )
     parser.add_argument(
-        "--instance-by-tags",
-        dest="instance_tags",
+        "--instances-by-tags",
+        dest="instances_tags",
         action="store",
         help="instances tags to look for, use the format Key:Value",
+    )
+    parser.add_argument(
+        "--volume-by-id", dest="volume_id", action="store", help="volume to backup",
+    )
+    parser.add_argument(
+        "--volumes-by-tags",
+        dest="volumes_tags",
+        action="store",
+        help="volumes tags to look for, use the format Key:Value",
     )
     parser.add_argument(
         "--rotate",
@@ -52,12 +61,23 @@ def main():
     )
     args = parser.parse_args()
 
-    if args.instance_tags and len(args.instance_tags.split(":")) != 2:
+    if args.instances_tags and len(args.instances_tags.split(":")) != 2:
         parser.error(
-            "please use the format Key:Value for tags: --instance-by-tags Name:vm-1"
+            "please use the format Key:Value for tags: --instances-by-tags Name:vm-1"
         )
-    elif not args.instance_id and not args.instance_tags:
-        parser.error("please use --instance-by-id or --instance-by-tags")
+    elif args.volumes_tags and len(args.volumes_tags.split(":")) != 2:
+        parser.error(
+            "please use the format Key:Value for tags: --volumes-by-tags Name:vm-1"
+        )
+    elif (
+        not args.instance_id
+        and not args.instances_tags
+        and not args.volume_id
+        and not args.volumes_tags
+    ):
+        parser.error(
+            "please use --instance-by-id or --instances-by-tags or --volume-by-id or --volumes-by-tags"
+        )
 
     if args.debug:
         setup_logging(level=logging.DEBUG)
@@ -66,8 +86,12 @@ def main():
 
     if args.instance_id:
         res = bsu_backup.find_instance_by_id(conn, args.instance_id)
-    elif args.instance_tags:
-        res = bsu_backup.find_instances_by_tags(conn, args.instance_tags)
+    elif args.instances_tags:
+        res = bsu_backup.find_instances_by_tags(conn, args.instances_tags)
+    elif args.volume_id:
+        res = bsu_backup.find_volume_by_id(conn, args.volume_tags)
+    elif args.volumes_tags:
+        res = bsu_backup.find_volumes_by_tags(conn, args.volumes_tags)
 
     bsu_backup.rotate_snapshots(conn, res, args.rotate)
 
