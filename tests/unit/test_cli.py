@@ -8,12 +8,6 @@ import botocore
 
 
 class TestCliMethods(unittest.TestCase):
-    def setUp(self):
-        logging.disable(logging.CRITICAL)
-
-    def tearDown(self):
-        logging.disable(logging.NOTSET)
-
     @patch("sys.argv", [sys.argv[0]])
     def test_cli(self):
         self.assertRaises(SystemExit, cli.main)
