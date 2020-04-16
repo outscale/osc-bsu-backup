@@ -34,7 +34,9 @@ class TestBsuBackup(unittest.TestCase):
     def test_find_instance_by_id1(self):
         with Stubber(self.ec2) as stubber:
             stubber.add_response(
-                "describe_instances", fixtures.instances, {"InstanceIds": ["i-e6b7ab04"]}
+                "describe_instances",
+                fixtures.instances,
+                {"InstanceIds": ["i-e6b7ab04"]},
             )
             for i in bsu.find_instance_by_id(self.ec2, "i-e6b7ab04"):
                 self.assertEqual(i, "vol-a87f91c1")
@@ -44,7 +46,8 @@ class TestBsuBackup(unittest.TestCase):
             stubber.add_response(
                 "describe_instances", {}, {"InstanceIds": ["i-e6b7ab05"]}
             )
-            self.assertFalse(bsu.find_instance_by_id(self.ec2, "i-e6b7ab05"))
+            for i in bsu.find_instance_by_id(self.ec2, "i-e6b7ab05"):
+                self.assertEqual(i, None)
 
     def test_find_instances_by_tags1(self):
         with Stubber(self.ec2) as stubber:
@@ -110,7 +113,8 @@ class TestBsuBackup(unittest.TestCase):
             stubber.add_response("delete_snapshot", {}, {"SnapshotId": "snap-e6996c10"})
             stubber.add_response("delete_snapshot", {}, {"SnapshotId": "snap-8f3436c0"})
             self.assertEqual(
-                bsu.rotate_snapshots(self.ec2, ["vol-59b94d63", "vol-640141cf"], 8), None
+                bsu.rotate_snapshots(self.ec2, ["vol-59b94d63", "vol-640141cf"], 8),
+                None,
             )
 
     def test_rotate_snapshots2(self):
@@ -150,7 +154,9 @@ class TestBsuBackup(unittest.TestCase):
                 fixtures.snapshots1,
                 {"Filters": [{"Name": "volume-id", "Values": ["vol-59b94d63"]}]},
             )
-            self.assertEqual(bsu.rotate_snapshots(self.ec2, ["vol-59b94d63"], 5487812), None)
+            self.assertEqual(
+                bsu.rotate_snapshots(self.ec2, ["vol-59b94d63"], 5487812), None
+            )
 
     def test_rotate_snapshots6(self):
         with Stubber(self.ec2) as stubber:
