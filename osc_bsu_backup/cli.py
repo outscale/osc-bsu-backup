@@ -7,6 +7,23 @@ from osc_bsu_backup import __version__
 
 logger = setup_logging(__name__)
 
+def backup(args):
+    conn = bsu_backup.auth(args.profile, args.region, args.endpoint)
+
+    if args.instance_id:
+        res = bsu_backup.find_instance_by_id(conn, args.instance_id)
+    elif args.instances_tags:
+        res = bsu_backup.find_instances_by_tags(conn, args.instances_tags)
+    elif args.volume_id:
+        res = bsu_backup.find_volume_by_id(conn, args.volume_id)
+    elif args.volumes_tags:
+        res = bsu_backup.find_volumes_by_tags(conn, args.volumes_tags)
+
+    if res:
+        bsu_backup.rotate_snapshots(conn, res, args.rotate)
+        bsu_backup.create_snapshots(conn, res)
+
+    return True
 
 def main():
     logger.info("osc_bsu_backup: %s", __version__)
@@ -82,20 +99,7 @@ def main():
     if args.debug:
         setup_logging(level=logging.DEBUG)
 
-    conn = bsu_backup.auth(args.profile, args.region, args.endpoint)
-
-    if args.instance_id:
-        res = bsu_backup.find_instance_by_id(conn, args.instance_id)
-    elif args.instances_tags:
-        res = bsu_backup.find_instances_by_tags(conn, args.instances_tags)
-    elif args.volume_id:
-        res = bsu_backup.find_volume_by_id(conn, args.volume_tags)
-    elif args.volumes_tags:
-        res = bsu_backup.find_volumes_by_tags(conn, args.volumes_tags)
-
-    bsu_backup.rotate_snapshots(conn, res, args.rotate)
-
-    bsu_backup.create_snapshots(conn, res)
+    return backup(args)
 
 
 if __name__ == "__main__":

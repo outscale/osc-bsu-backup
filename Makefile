@@ -12,7 +12,7 @@ unit: virtualenv
 	./venv/bin/python -m unittest -v $$(ls tests/unit/test_*.py)
 
 integration: virtualenv
-	./venv/bin/python -m unittest -v $$(ls tests/unit/test_*.py)
+	./venv/bin/python -m unittest -v $$(ls tests/integration/test_*.py)
 
 wheel: virtualenv
 	./venv/bin/python setup.py bdist_wheel
