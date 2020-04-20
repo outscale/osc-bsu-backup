@@ -73,7 +73,10 @@ def find_instances_by_tags(conn, tags):
     volumes = []
 
     reservations = conn.describe_instances(
-        Filters=[{"Name": "tag:{}".format(tag_key), "Values": [tag_value]}]
+        Filters=[
+            {"Name": "tag:{}".format(tag_key), "Values": [tag_value]},
+            {"Name": "instance-state-name", "Values": ["running", "stopped"]},
+        ]
     )
 
     if reservations:
@@ -82,13 +85,13 @@ def find_instances_by_tags(conn, tags):
                 logger.info(
                     "instance found: %s %s", instance["InstanceId"], instance["Tags"]
                 )
-            for vol in instance["BlockDeviceMappings"]:
-                logger.info(
-                    "volume found: %s %s",
-                    instance["InstanceId"],
-                    vol["Ebs"]["VolumeId"],
-                )
-                volumes.append(vol["Ebs"]["VolumeId"])
+                for vol in instance["BlockDeviceMappings"]:
+                    logger.info(
+                        "volume found: %s %s",
+                        instance["InstanceId"],
+                        vol["Ebs"]["VolumeId"],
+                    )
+                    volumes.append(vol["Ebs"]["VolumeId"])
     else:
         logger.warning("instances not found: %s", tags)
 

@@ -8,14 +8,14 @@ virtualenv:
 develop: virtualenv
 	./venv/bin/python setup.py develop
 
-unit: virtualenv
+unit: virtualenv format
 	./venv/bin/python -m unittest -v $$(ls tests/unit/test_*.py)
 
-integration: virtualenv
+integration: virtualenv format
 	./venv/bin/python -m unittest -v $$(ls tests/integration/test_*.py)
 
 wheel: virtualenv
 	./venv/bin/python setup.py bdist_wheel
 
-format: virtualenv
+format: virtualenv 
 	./venv/bin/pip install black && ./venv/bin/black $(PYTHONFILES) && ./venv/bin/black $(PYTHONUTESTFILES)

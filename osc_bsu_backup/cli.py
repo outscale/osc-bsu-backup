@@ -7,6 +7,7 @@ from osc_bsu_backup import __version__
 
 logger = setup_logging(__name__)
 
+
 def backup(args):
     conn = bsu_backup.auth(args.profile, args.region, args.endpoint)
 
@@ -24,6 +25,7 @@ def backup(args):
         bsu_backup.create_snapshots(conn, res)
 
     return True
+
 
 def main():
     logger.info("osc_bsu_backup: %s", __version__)
