@@ -113,7 +113,7 @@ volumes = {
 snapshots1 = {
     "Snapshots": [
         {
-            "Description": "osc-bsu-backup 0.1",
+            "Description": "osc-bsu-backup 0.0.1",
             "Encrypted": False,
             "OwnerId": "763630846467",
             "Progress": "100%",
@@ -250,7 +250,7 @@ snapshots1 = {
 snapshots2 = {
     "Snapshots": [
         {
-            "Description": "osc-bsu-backup 0.1",
+            "Description": "osc-bsu-backup 0.0.1",
             "Encrypted": False,
             "OwnerId": "763630846467",
             "Progress": "100%",
@@ -397,7 +397,7 @@ snapshots2 = {
 }
 
 create_snapshot1 = {
-    "Description": "",
+    "Description": "osc-bsu-backup 0.0.1",
     "Encrypted": False,
     "OwnerId": "763630846467",
     "Progress": "0%",
@@ -411,7 +411,7 @@ create_snapshot1 = {
 snapshot_completed1 = {
     "Snapshots": [
         {
-            "Description": "",
+            "Description": "osc-bsu-backup 0.0.1",
             "Encrypted": False,
             "OwnerId": "763630846467",
             "Progress": "100%",
@@ -426,7 +426,7 @@ snapshot_completed1 = {
 }
 
 create_snapshot2 = {
-    "Description": "",
+    "Description": "osc-bsu-backup 0.0.1",
     "Encrypted": False,
     "OwnerId": "763630846467",
     "Progress": "0%",
@@ -440,7 +440,7 @@ create_snapshot2 = {
 snapshot_completed2 = {
     "Snapshots": [
         {
-            "Description": "",
+            "Description": "osc-bsu-backup 0.0.1",
             "Encrypted": False,
             "OwnerId": "763630846467",
             "Progress": "100%",
@@ -452,7 +452,7 @@ snapshot_completed2 = {
             "Tags": [],
         },
         {
-            "Description": "",
+            "Description": "osc-bsu-backup 0.0.1",
             "Encrypted": False,
             "OwnerId": "763630846467",
             "Progress": "100%",

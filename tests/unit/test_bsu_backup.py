@@ -54,7 +54,15 @@ class TestBsuBackup(unittest.TestCase):
             stubber.add_response(
                 "describe_instances",
                 fixtures.instances,
-                {"Filters": [{"Name": "tag:Name", "Values": ["test1"]}]},
+                {
+                    "Filters": [
+                        {"Name": "tag:Name", "Values": ["test1"]},
+                        {
+                            "Name": "instance-state-name",
+                            "Values": ["running", "stopped"],
+                        },
+                    ]
+                },
             )
             for i in bsu.find_instances_by_tags(self.ec2, "Name:test1"):
                 self.assertEqual(i, "vol-a87f91c1")
@@ -100,15 +108,28 @@ class TestBsuBackup(unittest.TestCase):
             stubber.add_response(
                 "describe_snapshots",
                 fixtures.snapshots1,
-                {"Filters": [{"Name": "volume-id", "Values": ["vol-59b94d63"]}]},
+                {
+                    "Filters": [
+                        {"Name": "volume-id", "Values": ["vol-59b94d63"]},
+                        {"Name": "description", "Values": ["osc-bsu-backup 0.0.1"]},
+                    ]
+                },
             )
+            stubber.add_response("delete_snapshot", {}, {"SnapshotId": "snap-d5caf847"})
             stubber.add_response("delete_snapshot", {}, {"SnapshotId": "snap-30e1c236"})
             stubber.add_response("delete_snapshot", {}, {"SnapshotId": "snap-cf4748a5"})
+
             stubber.add_response(
                 "describe_snapshots",
                 fixtures.snapshots2,
-                {"Filters": [{"Name": "volume-id", "Values": ["vol-640141cf"]}]},
+                {
+                    "Filters": [
+                        {"Name": "volume-id", "Values": ["vol-640141cf"]},
+                        {"Name": "description", "Values": ["osc-bsu-backup 0.0.1"]},
+                    ]
+                },
             )
+            stubber.add_response("delete_snapshot", {}, {"SnapshotId": "snap-9c3c5d34"})
             stubber.add_response("delete_snapshot", {}, {"SnapshotId": "snap-fa25ee50"})
             stubber.add_response("delete_snapshot", {}, {"SnapshotId": "snap-e6996c10"})
             stubber.add_response("delete_snapshot", {}, {"SnapshotId": "snap-8f3436c0"})
@@ -122,8 +143,14 @@ class TestBsuBackup(unittest.TestCase):
             stubber.add_response(
                 "describe_snapshots",
                 fixtures.snapshots1,
-                {"Filters": [{"Name": "volume-id", "Values": ["vol-59b94d63"]}]},
+                {
+                    "Filters": [
+                        {"Name": "volume-id", "Values": ["vol-59b94d63"]},
+                        {"Name": "description", "Values": ["osc-bsu-backup 0.0.1"]},
+                    ]
+                },
             )
+            stubber.add_response("delete_snapshot", {}, {"SnapshotId": "snap-30e1c236"})
             stubber.add_response("delete_snapshot", {}, {"SnapshotId": "snap-cf4748a5"})
             self.assertEqual(bsu.rotate_snapshots(self.ec2, ["vol-59b94d63"], 9), None)
 
@@ -132,7 +159,12 @@ class TestBsuBackup(unittest.TestCase):
             stubber.add_response(
                 "describe_snapshots",
                 fixtures.snapshots1,
-                {"Filters": [{"Name": "volume-id", "Values": ["vol-59b94d63"]}]},
+                {
+                    "Filters": [
+                        {"Name": "volume-id", "Values": ["vol-59b94d63"]},
+                        {"Name": "description", "Values": ["osc-bsu-backup 0.0.1"]},
+                    ]
+                },
             )
             self.assertEqual(bsu.rotate_snapshots(self.ec2, ["vol-59b94d63"], 12), None)
 
@@ -141,7 +173,12 @@ class TestBsuBackup(unittest.TestCase):
             stubber.add_response(
                 "describe_snapshots",
                 fixtures.snapshots1,
-                {"Filters": [{"Name": "volume-id", "Values": ["vol-59b94d63"]}]},
+                {
+                    "Filters": [
+                        {"Name": "volume-id", "Values": ["vol-59b94d63"]},
+                        {"Name": "description", "Values": ["osc-bsu-backup 0.0.1"]},
+                    ]
+                },
             )
             self.assertEqual(
                 bsu.rotate_snapshots(self.ec2, ["vol-59b94d63"], -5487812), None
@@ -152,7 +189,12 @@ class TestBsuBackup(unittest.TestCase):
             stubber.add_response(
                 "describe_snapshots",
                 fixtures.snapshots1,
-                {"Filters": [{"Name": "volume-id", "Values": ["vol-59b94d63"]}]},
+                {
+                    "Filters": [
+                        {"Name": "volume-id", "Values": ["vol-59b94d63"]},
+                        {"Name": "description", "Values": ["osc-bsu-backup 0.0.1"]},
+                    ]
+                },
             )
             self.assertEqual(
                 bsu.rotate_snapshots(self.ec2, ["vol-59b94d63"], 5487812), None
@@ -163,7 +205,12 @@ class TestBsuBackup(unittest.TestCase):
             stubber.add_response(
                 "describe_snapshots",
                 {"Snapshots": []},
-                {"Filters": [{"Name": "volume-id", "Values": ["aaaa"]}]},
+                {
+                    "Filters": [
+                        {"Name": "volume-id", "Values": ["aaaa"]},
+                        {"Name": "description", "Values": ["osc-bsu-backup 0.0.1"]},
+                    ]
+                },
             )
             self.assertEqual(bsu.rotate_snapshots(self.ec2, ["aaaa"], 14), None)
 
