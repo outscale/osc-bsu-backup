@@ -124,7 +124,7 @@ class TestIntegrationMethods(unittest.TestCase):
             instance_id = None
             instances_tags = None
             volumes_tags = None
-            profile = "default"
+            profile = None
             region = "eu-west-2"
             endpoint = None
             rotate = 1
@@ -156,7 +156,7 @@ class TestIntegrationMethods(unittest.TestCase):
             instance_id = None
             instances_tags = None
             volumes_tags = "test2:osc_bsu_backup_27aaade4"
-            profile = "default"
+            profile = None
             region = "eu-west-2"
             endpoint = None
             rotate = 1
@@ -188,7 +188,7 @@ class TestIntegrationMethods(unittest.TestCase):
             instance_id = self.vm1["Instances"][0]["InstanceId"]
             instances_tags = None
             volumes_tags = None
-            profile = "default"
+            profile = None
             region = "eu-west-2"
             endpoint = None
             rotate = 1
@@ -220,7 +220,7 @@ class TestIntegrationMethods(unittest.TestCase):
             instance_id = None
             instances_tags = "test2:osc_bsu_backup_27aaade4"
             volumes_tags = None
-            profile = "default"
+            profile = None
             region = "eu-west-2"
             endpoint = None
             rotate = 1
