@@ -9,7 +9,6 @@ import os
 import osc_bsu_backup.bsu_backup as bsu
 from osc_bsu_backup.error import InputError
 import tests.unit.fixtures_bsu_backup as fixtures
-from osc_bsu_backup import __version__
 
 
 class TestBsuBackup(unittest.TestCase):
@@ -113,7 +112,12 @@ class TestBsuBackup(unittest.TestCase):
                 {
                     "Filters": [
                         {"Name": "volume-id", "Values": ["vol-59b94d63"]},
-                        {"Name": "description", "Values": ["osc-bsu-backup EF50CF3A80164A5EABAF8C78B2314C65"]},
+                        {
+                            "Name": "description",
+                            "Values": [
+                                "osc-bsu-backup EF50CF3A80164A5EABAF8C78B2314C65"
+                            ],
+                        },
                     ]
                 },
             )
@@ -127,7 +131,12 @@ class TestBsuBackup(unittest.TestCase):
                 {
                     "Filters": [
                         {"Name": "volume-id", "Values": ["vol-640141cf"]},
-                        {"Name": "description", "Values": ["osc-bsu-backup EF50CF3A80164A5EABAF8C78B2314C65"]},
+                        {
+                            "Name": "description",
+                            "Values": [
+                                "osc-bsu-backup EF50CF3A80164A5EABAF8C78B2314C65"
+                            ],
+                        },
                     ]
                 },
             )
@@ -148,7 +157,12 @@ class TestBsuBackup(unittest.TestCase):
                 {
                     "Filters": [
                         {"Name": "volume-id", "Values": ["vol-59b94d63"]},
-                        {"Name": "description", "Values": ["osc-bsu-backup EF50CF3A80164A5EABAF8C78B2314C65"]},
+                        {
+                            "Name": "description",
+                            "Values": [
+                                "osc-bsu-backup EF50CF3A80164A5EABAF8C78B2314C65"
+                            ],
+                        },
                     ]
                 },
             )
@@ -164,7 +178,12 @@ class TestBsuBackup(unittest.TestCase):
                 {
                     "Filters": [
                         {"Name": "volume-id", "Values": ["vol-59b94d63"]},
-                        {"Name": "description", "Values": ["osc-bsu-backup EF50CF3A80164A5EABAF8C78B2314C65"]},
+                        {
+                            "Name": "description",
+                            "Values": [
+                                "osc-bsu-backup EF50CF3A80164A5EABAF8C78B2314C65"
+                            ],
+                        },
                     ]
                 },
             )
@@ -178,7 +197,12 @@ class TestBsuBackup(unittest.TestCase):
                 {
                     "Filters": [
                         {"Name": "volume-id", "Values": ["vol-59b94d63"]},
-                        {"Name": "description", "Values": ["osc-bsu-backup EF50CF3A80164A5EABAF8C78B2314C65"]},
+                        {
+                            "Name": "description",
+                            "Values": [
+                                "osc-bsu-backup EF50CF3A80164A5EABAF8C78B2314C65"
+                            ],
+                        },
                     ]
                 },
             )
@@ -194,7 +218,12 @@ class TestBsuBackup(unittest.TestCase):
                 {
                     "Filters": [
                         {"Name": "volume-id", "Values": ["vol-59b94d63"]},
-                        {"Name": "description", "Values": ["osc-bsu-backup EF50CF3A80164A5EABAF8C78B2314C65"]},
+                        {
+                            "Name": "description",
+                            "Values": [
+                                "osc-bsu-backup EF50CF3A80164A5EABAF8C78B2314C65"
+                            ],
+                        },
                     ]
                 },
             )
@@ -210,7 +239,12 @@ class TestBsuBackup(unittest.TestCase):
                 {
                     "Filters": [
                         {"Name": "volume-id", "Values": ["aaaa"]},
-                        {"Name": "description", "Values": ["osc-bsu-backup EF50CF3A80164A5EABAF8C78B2314C65"]},
+                        {
+                            "Name": "description",
+                            "Values": [
+                                "osc-bsu-backup EF50CF3A80164A5EABAF8C78B2314C65"
+                            ],
+                        },
                     ]
                 },
             )
@@ -222,7 +256,7 @@ class TestBsuBackup(unittest.TestCase):
                 "create_snapshot",
                 fixtures.create_snapshot1,
                 {
-                    "Description": "osc-bsu-backup {}".format(__version__),
+                    "Description": "osc-bsu-backup EF50CF3A80164A5EABAF8C78B2314C65",
                     "VolumeId": "vol-56d30e10",
                 },
             )
@@ -239,7 +273,7 @@ class TestBsuBackup(unittest.TestCase):
                 "create_snapshot",
                 fixtures.create_snapshot1,
                 {
-                    "Description": "osc-bsu-backup {}".format(__version__),
+                    "Description": "osc-bsu-backup EF50CF3A80164A5EABAF8C78B2314C65",
                     "VolumeId": "vol-56d30e10",
                 },
             )
@@ -247,7 +281,7 @@ class TestBsuBackup(unittest.TestCase):
                 "create_snapshot",
                 fixtures.create_snapshot2,
                 {
-                    "Description": "osc-bsu-backup {}".format(__version__),
+                    "Description": "osc-bsu-backup ",
                     "VolumeId": "vol-640141cf",
                 },
             )
