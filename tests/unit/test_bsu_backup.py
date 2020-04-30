@@ -113,7 +113,7 @@ class TestBsuBackup(unittest.TestCase):
                 {
                     "Filters": [
                         {"Name": "volume-id", "Values": ["vol-59b94d63"]},
-                        {"Name": "description", "Values": ["osc-bsu-backup 0.0.2"]},
+                        {"Name": "description", "Values": ["osc-bsu-backup EF50CF3A80164A5EABAF8C78B2314C65"]},
                     ]
                 },
             )
@@ -127,7 +127,7 @@ class TestBsuBackup(unittest.TestCase):
                 {
                     "Filters": [
                         {"Name": "volume-id", "Values": ["vol-640141cf"]},
-                        {"Name": "description", "Values": ["osc-bsu-backup 0.0.2"]},
+                        {"Name": "description", "Values": ["osc-bsu-backup EF50CF3A80164A5EABAF8C78B2314C65"]},
                     ]
                 },
             )
@@ -148,7 +148,7 @@ class TestBsuBackup(unittest.TestCase):
                 {
                     "Filters": [
                         {"Name": "volume-id", "Values": ["vol-59b94d63"]},
-                        {"Name": "description", "Values": ["osc-bsu-backup 0.0.2"]},
+                        {"Name": "description", "Values": ["osc-bsu-backup EF50CF3A80164A5EABAF8C78B2314C65"]},
                     ]
                 },
             )
@@ -164,7 +164,7 @@ class TestBsuBackup(unittest.TestCase):
                 {
                     "Filters": [
                         {"Name": "volume-id", "Values": ["vol-59b94d63"]},
-                        {"Name": "description", "Values": ["osc-bsu-backup 0.0.2"]},
+                        {"Name": "description", "Values": ["osc-bsu-backup EF50CF3A80164A5EABAF8C78B2314C65"]},
                     ]
                 },
             )
@@ -178,7 +178,7 @@ class TestBsuBackup(unittest.TestCase):
                 {
                     "Filters": [
                         {"Name": "volume-id", "Values": ["vol-59b94d63"]},
-                        {"Name": "description", "Values": ["osc-bsu-backup 0.0.2"]},
+                        {"Name": "description", "Values": ["osc-bsu-backup EF50CF3A80164A5EABAF8C78B2314C65"]},
                     ]
                 },
             )
@@ -194,7 +194,7 @@ class TestBsuBackup(unittest.TestCase):
                 {
                     "Filters": [
                         {"Name": "volume-id", "Values": ["vol-59b94d63"]},
-                        {"Name": "description", "Values": ["osc-bsu-backup 0.0.2"]},
+                        {"Name": "description", "Values": ["osc-bsu-backup EF50CF3A80164A5EABAF8C78B2314C65"]},
                     ]
                 },
             )
@@ -210,7 +210,7 @@ class TestBsuBackup(unittest.TestCase):
                 {
                     "Filters": [
                         {"Name": "volume-id", "Values": ["aaaa"]},
-                        {"Name": "description", "Values": ["osc-bsu-backup 0.0.2"]},
+                        {"Name": "description", "Values": ["osc-bsu-backup EF50CF3A80164A5EABAF8C78B2314C65"]},
                     ]
                 },
             )
