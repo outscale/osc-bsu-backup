@@ -3,11 +3,9 @@ import boto3
 from osc_bsu_backup.utils import setup_logging
 from osc_bsu_backup.error import InputError
 
-from osc_bsu_backup import __version__
-
 logger = setup_logging(__name__)
 
-DESCRIPTION = "osc-bsu-backup {}".format(__version__)
+DESCRIPTION = "osc-bsu-backup EF50CF3A80164A5EABAF8C78B2314C65"
 
 
 def auth(profile, region, endpoint=None):
