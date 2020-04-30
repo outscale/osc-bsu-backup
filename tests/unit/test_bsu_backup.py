@@ -281,7 +281,7 @@ class TestBsuBackup(unittest.TestCase):
                 "create_snapshot",
                 fixtures.create_snapshot2,
                 {
-                    "Description": "osc-bsu-backup ",
+                    "Description": "osc-bsu-backup EF50CF3A80164A5EABAF8C78B2314C65",
                     "VolumeId": "vol-640141cf",
                 },
             )
