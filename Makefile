@@ -37,7 +37,10 @@ docker-unit: docker-image
 	docker run osc-bsu-backup:$(VERSION) unit
 
 docker-integration: docker-image
-	docker run osc-bsu-backup:$(VERSION) integration
+	docker run \
+		-e "AWS_ACCESS_KEY_ID=$(AWS_ACCESS_KEY_ID)" \
+		-e "AWS_SECRET_ACCESS_KEY=$(AWS_SECRET_ACCESS_KEY)" \
+		osc-bsu-backup:$(VERSION) integration
 
 docker-wheel: docker-image
 	docker run \

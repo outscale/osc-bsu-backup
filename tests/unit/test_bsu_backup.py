@@ -14,7 +14,9 @@ from osc_bsu_backup import __version__
 
 class TestBsuBackup(unittest.TestCase):
     def setUp(self):
-        self.ec2 = botocore.session.get_session().create_client("ec2", region_name="eu-west-2")
+        self.ec2 = botocore.session.get_session().create_client(
+            "ec2", region_name="eu-west-2"
+        )
         logging.disable(logging.CRITICAL)
 
     def tearDown(self):
