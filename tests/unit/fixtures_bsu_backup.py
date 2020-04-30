@@ -113,7 +113,7 @@ volumes = {
 snapshots1 = {
     "Snapshots": [
         {
-            "Description": "osc-bsu-backup 0.0.2",
+            "Description": "osc-bsu-backup EF50CF3A80164A5EABAF8C78B2314C65",
             "Encrypted": False,
             "OwnerId": "763630846467",
             "Progress": "100%",
@@ -125,7 +125,7 @@ snapshots1 = {
             "Tags": [],
         },
         {
-            "Description": "osc-bsu-backup 0.0.2",
+            "Description": "osc-bsu-backup EF50CF3A80164A5EABAF8C78B2314C65",
             "Encrypted": False,
             "OwnerId": "763630846467",
             "Progress": "100%",
@@ -137,7 +137,7 @@ snapshots1 = {
             "Tags": [],
         },
         {
-            "Description": "osc-bsu-backup 0.0.2",
+            "Description": "osc-bsu-backup EF50CF3A80164A5EABAF8C78B2314C65",
             "Encrypted": False,
             "OwnerId": "763630846467",
             "Progress": "100%",
@@ -149,7 +149,7 @@ snapshots1 = {
             "Tags": [],
         },
         {
-            "Description": "osc-bsu-backup 0.0.2",
+            "Description": "osc-bsu-backup EF50CF3A80164A5EABAF8C78B2314C65",
             "Encrypted": False,
             "OwnerId": "763630846467",
             "Progress": "100%",
@@ -161,7 +161,7 @@ snapshots1 = {
             "Tags": [],
         },
         {
-            "Description": "osc-bsu-backup 0.0.2",
+            "Description": "osc-bsu-backup EF50CF3A80164A5EABAF8C78B2314C65",
             "Encrypted": False,
             "OwnerId": "763630846467",
             "Progress": "100%",
@@ -173,7 +173,7 @@ snapshots1 = {
             "Tags": [],
         },
         {
-            "Description": "osc-bsu-backup 0.0.2",
+            "Description": "osc-bsu-backup EF50CF3A80164A5EABAF8C78B2314C65",
             "Encrypted": False,
             "OwnerId": "763630846467",
             "Progress": "100%",
@@ -185,7 +185,7 @@ snapshots1 = {
             "Tags": [],
         },
         {
-            "Description": "osc-bsu-backup 0.0.2",
+            "Description": "osc-bsu-backup EF50CF3A80164A5EABAF8C78B2314C65",
             "Encrypted": False,
             "OwnerId": "763630846467",
             "Progress": "100%",
@@ -197,7 +197,7 @@ snapshots1 = {
             "Tags": [],
         },
         {
-            "Description": "osc-bsu-backup 0.0.2",
+            "Description": "osc-bsu-backup EF50CF3A80164A5EABAF8C78B2314C65",
             "Encrypted": False,
             "OwnerId": "763630846467",
             "Progress": "100%",
@@ -209,7 +209,7 @@ snapshots1 = {
             "Tags": [],
         },
         {
-            "Description": "osc-bsu-backup 0.0.2",
+            "Description": "osc-bsu-backup EF50CF3A80164A5EABAF8C78B2314C65",
             "Encrypted": False,
             "OwnerId": "763630846467",
             "Progress": "100%",
@@ -221,7 +221,7 @@ snapshots1 = {
             "Tags": [],
         },
         {
-            "Description": "osc-bsu-backup 0.0.2",
+            "Description": "osc-bsu-backup EF50CF3A80164A5EABAF8C78B2314C65",
             "Encrypted": False,
             "OwnerId": "763630846467",
             "Progress": "100%",
@@ -233,7 +233,7 @@ snapshots1 = {
             "Tags": [],
         },
         {
-            "Description": "osc-bsu-backup 0.0.2",
+            "Description": "osc-bsu-backup EF50CF3A80164A5EABAF8C78B2314C65",
             "Encrypted": False,
             "OwnerId": "763630846467",
             "Progress": "100%",
@@ -250,7 +250,7 @@ snapshots1 = {
 snapshots2 = {
     "Snapshots": [
         {
-            "Description": "osc-bsu-backup 0.0.2",
+            "Description": "osc-bsu-backup EF50CF3A80164A5EABAF8C78B2314C65",
             "Encrypted": False,
             "OwnerId": "763630846467",
             "Progress": "100%",
@@ -262,7 +262,7 @@ snapshots2 = {
             "Tags": [],
         },
         {
-            "Description": "osc-bsu-backup 0.0.2",
+            "Description": "osc-bsu-backup EF50CF3A80164A5EABAF8C78B2314C65",
             "Encrypted": False,
             "OwnerId": "763630846467",
             "Progress": "100%",
@@ -274,7 +274,7 @@ snapshots2 = {
             "Tags": [],
         },
         {
-            "Description": "osc-bsu-backup 0.0.2",
+            "Description": "osc-bsu-backup EF50CF3A80164A5EABAF8C78B2314C65",
             "Encrypted": False,
             "OwnerId": "763630846467",
             "Progress": "100%",
@@ -286,7 +286,7 @@ snapshots2 = {
             "Tags": [],
         },
         {
-            "Description": "osc-bsu-backup 0.0.2",
+            "Description": "osc-bsu-backup EF50CF3A80164A5EABAF8C78B2314C65",
             "Encrypted": False,
             "OwnerId": "763630846467",
             "Progress": "100%",
@@ -298,7 +298,7 @@ snapshots2 = {
             "Tags": [],
         },
         {
-            "Description": "osc-bsu-backup 0.0.2",
+            "Description": "osc-bsu-backup EF50CF3A80164A5EABAF8C78B2314C65",
             "Encrypted": False,
             "OwnerId": "763630846467",
             "Progress": "100%",
@@ -310,7 +310,7 @@ snapshots2 = {
             "Tags": [],
         },
         {
-            "Description": "osc-bsu-backup 0.0.2",
+            "Description": "osc-bsu-backup EF50CF3A80164A5EABAF8C78B2314C65",
             "Encrypted": False,
             "OwnerId": "763630846467",
             "Progress": "100%",
@@ -322,7 +322,7 @@ snapshots2 = {
             "Tags": [],
         },
         {
-            "Description": "osc-bsu-backup 0.0.2",
+            "Description": "osc-bsu-backup EF50CF3A80164A5EABAF8C78B2314C65",
             "Encrypted": False,
             "OwnerId": "763630846467",
             "Progress": "100%",
@@ -334,7 +334,7 @@ snapshots2 = {
             "Tags": [],
         },
         {
-            "Description": "osc-bsu-backup 0.0.2",
+            "Description": "osc-bsu-backup EF50CF3A80164A5EABAF8C78B2314C65",
             "Encrypted": False,
             "OwnerId": "763630846467",
             "Progress": "100%",
@@ -346,7 +346,7 @@ snapshots2 = {
             "Tags": [],
         },
         {
-            "Description": "osc-bsu-backup 0.0.2",
+            "Description": "osc-bsu-backup EF50CF3A80164A5EABAF8C78B2314C65",
             "Encrypted": False,
             "OwnerId": "763630846467",
             "Progress": "100%",
@@ -358,7 +358,7 @@ snapshots2 = {
             "Tags": [],
         },
         {
-            "Description": "osc-bsu-backup 0.0.2",
+            "Description": "osc-bsu-backup EF50CF3A80164A5EABAF8C78B2314C65",
             "Encrypted": False,
             "OwnerId": "763630846467",
             "Progress": "100%",
@@ -370,7 +370,7 @@ snapshots2 = {
             "Tags": [],
         },
         {
-            "Description": "osc-bsu-backup 0.0.2",
+            "Description": "osc-bsu-backup EF50CF3A80164A5EABAF8C78B2314C65",
             "Encrypted": False,
             "OwnerId": "763630846467",
             "Progress": "100%",
@@ -382,7 +382,7 @@ snapshots2 = {
             "Tags": [],
         },
         {
-            "Description": "osc-bsu-backup 0.0.2",
+            "Description": "osc-bsu-backup EF50CF3A80164A5EABAF8C78B2314C65",
             "Encrypted": False,
             "OwnerId": "763630846467",
             "Progress": "100%",
@@ -397,7 +397,7 @@ snapshots2 = {
 }
 
 create_snapshot1 = {
-    "Description": "osc-bsu-backup 0.0.2",
+    "Description": "osc-bsu-backup EF50CF3A80164A5EABAF8C78B2314C65",
     "Encrypted": False,
     "OwnerId": "763630846467",
     "Progress": "0%",
@@ -411,7 +411,7 @@ create_snapshot1 = {
 snapshot_completed1 = {
     "Snapshots": [
         {
-            "Description": "osc-bsu-backup 0.0.2",
+            "Description": "osc-bsu-backup EF50CF3A80164A5EABAF8C78B2314C65",
             "Encrypted": False,
             "OwnerId": "763630846467",
             "Progress": "100%",
@@ -426,7 +426,7 @@ snapshot_completed1 = {
 }
 
 create_snapshot2 = {
-    "Description": "osc-bsu-backup 0.0.2",
+    "Description": "osc-bsu-backup EF50CF3A80164A5EABAF8C78B2314C65",
     "Encrypted": False,
     "OwnerId": "763630846467",
     "Progress": "0%",
@@ -440,7 +440,7 @@ create_snapshot2 = {
 snapshot_completed2 = {
     "Snapshots": [
         {
-            "Description": "osc-bsu-backup 0.0.2",
+            "Description": "osc-bsu-backup EF50CF3A80164A5EABAF8C78B2314C65",
             "Encrypted": False,
             "OwnerId": "763630846467",
             "Progress": "100%",
@@ -452,7 +452,7 @@ snapshot_completed2 = {
             "Tags": [],
         },
         {
-            "Description": "osc-bsu-backup 0.0.2",
+            "Description": "osc-bsu-backup EF50CF3A80164A5EABAF8C78B2314C65",
             "Encrypted": False,
             "OwnerId": "763630846467",
             "Progress": "100%",
