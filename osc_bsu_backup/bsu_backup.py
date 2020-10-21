@@ -1,14 +1,16 @@
 import botocore
 import boto3
+from datetime import datetime, timedelta
 from osc_bsu_backup.utils import setup_logging
 from osc_bsu_backup.error import InputError
 
 logger = setup_logging(__name__)
 
 DESCRIPTION = "osc-bsu-backup EF50CF3A80164A5EABAF8C78B2314C65"
+OLD_DESCRIPTION = ["osc-bsu-backup 0.1", "osc-bsu-backup 0.0.2", "osc-bsu-backup 0.0.1"]
 
 
-def auth(profile, region, endpoint=None):
+def auth(profile, region, client_cert, endpoint=None):
     default_region = ["us-east-2", "eu-west-2", "cn-southeast-1", "us-west-1"]
 
     if not endpoint and region in default_region:
@@ -32,7 +34,15 @@ def auth(profile, region, endpoint=None):
     logger.info("authenticate: %s %s", region, endpoint)
 
     session = boto3.Session(profile_name=profile)
-    conn = session.client("ec2", region_name=region, endpoint_url=endpoint)
+    if client_cert:
+        conn = session.client(
+            "ec2",
+            region_name=region,
+            endpoint_url=endpoint,
+            config=botocore.config.Config(client_cert=client_cert),
+        )
+    else:
+        conn = session.client("ec2", region_name=region, endpoint_url=endpoint)
 
     logger.info(conn.describe_key_pairs()["KeyPairs"][0])
 
@@ -132,23 +142,63 @@ def find_volume_by_id(conn, id):
     return volumes
 
 
-def rotate_snapshots(conn, volumes, rotate=10):
+def rotate_snapshots(conn, volumes, rotate=10, rotate_only=False):
     logger.info("rotate_snapshot: %d", rotate)
     del_snaps = []
 
     for vol in volumes:
-        snaps = conn.describe_snapshots(
-            Filters=[
-                {"Name": "volume-id", "Values": [vol]},
-                {"Name": "description", "Values": [DESCRIPTION]},
-            ]
-        )
+        filters = [{"Name": "volume-id", "Values": [vol]}]
+        if rotate_only:
+            filters.append(
+                {"Name": "description", "Values": [DESCRIPTION] + OLD_DESCRIPTION}
+            )
+        snaps = conn.describe_snapshots(Filters=filters)
 
         if len(snaps["Snapshots"]) >= rotate and rotate >= 1:
             snaps["Snapshots"].sort(key=lambda x: x["StartTime"], reverse=True)
 
             for i, snap in enumerate(snaps["Snapshots"], start=0):
                 if i >= rotate:
+                    logger.info(
+                        "deleting this snap: %s %s %s",
+                        vol,
+                        snap["SnapshotId"],
+                        str(snap["StartTime"]),
+                    )
+
+                    try:
+                        del_snap = conn.delete_snapshot(SnapshotId=snap["SnapshotId"])
+                    except botocore.exceptions.ClientError as e:
+                        if e.response["Error"]["Code"] == "InvalidSnapshot.InUse":
+                            logger.error(e)
+                        else:
+                            raise e
+                else:
+                    logger.info(
+                        "snaps to keep: %s %s %s",
+                        vol,
+                        snap["SnapshotId"],
+                        str(snap["StartTime"]),
+                    )
+
+
+def rotate_days_snapshots(conn, volumes, rotate=10, rotate_only=False):
+    logger.info("rotate_snapshot: older than %d days", rotate)
+    del_snaps = []
+
+    for vol in volumes:
+        filters = [{"Name": "volume-id", "Values": [vol]}]
+        if rotate_only:
+            filters.append(
+                {"Name": "description", "Values": [DESCRIPTION] + OLD_DESCRIPTION}
+            )
+        snaps = conn.describe_snapshots(Filters=filters)
+
+        if len(snaps["Snapshots"]) >= rotate and rotate >= 1:
+            snaps["Snapshots"].sort(key=lambda x: x["StartTime"], reverse=True)
+
+            for i, snap in enumerate(snaps["Snapshots"], start=0):
+                if (datetime.now() - snap["StartTime"]) >= rotate:
                     logger.info(
                         "deleting this snap: %s %s %s",
                         vol,
