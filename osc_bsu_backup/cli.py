@@ -9,7 +9,7 @@ logger = setup_logging(__name__)
 
 
 def backup(args):
-    conn = bsu_backup.auth(args.profile, args.region, args.endpoint)
+    conn = bsu_backup.auth(args.profile, args.region, args.endpoint, args.client_cert)
 
     if args.instance_id:
         res = bsu_backup.find_instance_by_id(conn, args.instance_id)
@@ -21,7 +21,15 @@ def backup(args):
         res = bsu_backup.find_volumes_by_tags(conn, args.volumes_tags)
 
     if res:
-        bsu_backup.rotate_snapshots(conn, res, args.rotate)
+        if rotate_days:
+            bsu_backup.rotate_days_snapshots(
+                conn, res, args.rotate_days, args.rotate_only
+            )
+        elif rotate:
+            bsu_backup.rotate_snapshots(conn, res, args.rotate, args.rotate_only)
+        else:
+            bsu_backup.rotate_snapshots(conn, res, 10, args.rotate_only)
+
         bsu_backup.create_snapshots(conn, res)
 
     return True
@@ -46,7 +54,10 @@ def main():
         help="instances tags to look for, use the format Key:Value",
     )
     parser.add_argument(
-        "--volume-by-id", dest="volume_id", action="store", help="volume to backup",
+        "--volume-by-id",
+        dest="volume_id",
+        action="store",
+        help="volume to backup",
     )
     parser.add_argument(
         "--volumes-by-tags",
@@ -59,8 +70,23 @@ def main():
         dest="rotate",
         type=int,
         action="store",
-        default=10,
+        default=None,
         help="retention for snapshot",
+    )
+    parser.add_argument(
+        "--rotate-by-days",
+        dest="rotate_days",
+        type=int,
+        action="store",
+        default=None,
+        help="retention for snapshot, delete snapshots if there are older than N days",
+    )
+    parser.add_argument(
+        "--rotate-only",
+        dest="rotate_only",
+        action="store_true",
+        default=False,
+        help="only rotate snapshots create by osc-bsu-backup",
     )
     parser.add_argument(
         "--region", dest="region", action="store", default="eu-west-2", help="region"
@@ -74,6 +100,13 @@ def main():
         action="store",
         default="default",
         help="aws profile to use, ~/.aws/credentials",
+    ),
+    parser.add_argument(
+        "--client-cert",
+        dest="client_cert",
+        action="store",
+        default=None,
+        help="for TLS client authentication",
     )
     parser.add_argument(
         "--debug", dest="debug", action="store_true", default=False, help="enable debug"
@@ -97,6 +130,8 @@ def main():
         parser.error(
             "please use --instance-by-id or --instances-by-tags or --volume-by-id or --volumes-by-tags"
         )
+    elif args.rotate and args.rotate_days:
+        parser.error("you can't use rotate and rotate-by-days")
 
     if args.debug:
         setup_logging(level=logging.DEBUG)
