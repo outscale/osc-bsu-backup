@@ -1,3 +1,5 @@
+from datetime import datetime
+
 instances = {
     "Reservations": [
         {
@@ -118,7 +120,9 @@ snapshots1 = {
             "OwnerId": "763630846467",
             "Progress": "100%",
             "SnapshotId": "snap-cf4748a5",
-            "StartTime": "2019-12-19T16:02:22.204Z",
+            "StartTime": datetime.strptime(
+                "2019-12-17T16:02:22.204Z", "%Y-%m-%dT%H:%M:%S.%f%z"
+            ),
             "State": "completed",
             "VolumeId": "vol-59b94d63",
             "VolumeSize": 10,
@@ -130,7 +134,9 @@ snapshots1 = {
             "OwnerId": "763630846467",
             "Progress": "100%",
             "SnapshotId": "snap-04fd92f4",
-            "StartTime": "2019-12-19T16:56:20.567Z",
+            "StartTime": datetime.strptime(
+                "2019-12-19T16:56:20.567Z", "%Y-%m-%dT%H:%M:%S.%f%z"
+            ),
             "State": "completed",
             "VolumeId": "vol-59b94d63",
             "VolumeSize": 10,
@@ -142,7 +148,9 @@ snapshots1 = {
             "OwnerId": "763630846467",
             "Progress": "100%",
             "SnapshotId": "snap-30e1c236",
-            "StartTime": "2019-12-19T16:50:09.591Z",
+            "StartTime": datetime.strptime(
+                "2019-12-19T16:50:09.591Z", "%Y-%m-%dT%H:%M:%S.%f%z"
+            ),
             "State": "completed",
             "VolumeId": "vol-59b94d63",
             "VolumeSize": 10,
@@ -154,7 +162,9 @@ snapshots1 = {
             "OwnerId": "763630846467",
             "Progress": "100%",
             "SnapshotId": "snap-d5caf847",
-            "StartTime": "2019-12-19T16:53:04.271Z",
+            "StartTime": datetime.strptime(
+                "2019-12-19T16:53:04.271Z", "%Y-%m-%dT%H:%M:%S.%f%z"
+            ),
             "State": "completed",
             "VolumeId": "vol-59b94d63",
             "VolumeSize": 10,
@@ -166,7 +176,9 @@ snapshots1 = {
             "OwnerId": "763630846467",
             "Progress": "100%",
             "SnapshotId": "snap-f820da70",
-            "StartTime": "2019-12-19T16:57:03.137Z",
+            "StartTime": datetime.strptime(
+                "2019-12-19T16:57:03.137Z", "%Y-%m-%dT%H:%M:%S.%f%z"
+            ),
             "State": "completed",
             "VolumeId": "vol-59b94d63",
             "VolumeSize": 10,
@@ -178,7 +190,9 @@ snapshots1 = {
             "OwnerId": "763630846467",
             "Progress": "100%",
             "SnapshotId": "snap-e5b47810",
-            "StartTime": "2019-12-19T16:57:44.663Z",
+            "StartTime": datetime.strptime(
+                "2019-12-19T16:57:44.663Z", "%Y-%m-%dT%H:%M:%S.%f%z"
+            ),
             "State": "completed",
             "VolumeId": "vol-59b94d63",
             "VolumeSize": 10,
@@ -190,7 +204,9 @@ snapshots1 = {
             "OwnerId": "763630846467",
             "Progress": "100%",
             "SnapshotId": "snap-16959493",
-            "StartTime": "2019-12-19T17:21:06.316Z",
+            "StartTime": datetime.strptime(
+                "2019-12-19T17:21:06.316Z", "%Y-%m-%dT%H:%M:%S.%f%z"
+            ),
             "State": "completed",
             "VolumeId": "vol-59b94d63",
             "VolumeSize": 10,
@@ -202,7 +218,9 @@ snapshots1 = {
             "OwnerId": "763630846467",
             "Progress": "100%",
             "SnapshotId": "snap-a8fa23e2",
-            "StartTime": "2019-12-19T17:15:09.910Z",
+            "StartTime": datetime.strptime(
+                "2019-12-19T17:15:09.910Z", "%Y-%m-%dT%H:%M:%S.%f%z"
+            ),
             "State": "completed",
             "VolumeId": "vol-59b94d63",
             "VolumeSize": 10,
@@ -214,7 +232,9 @@ snapshots1 = {
             "OwnerId": "763630846467",
             "Progress": "100%",
             "SnapshotId": "snap-14f3772c",
-            "StartTime": "2019-12-19T17:18:27.772Z",
+            "StartTime": datetime.strptime(
+                "2019-12-19T17:18:27.772Z", "%Y-%m-%dT%H:%M:%S.%f%z"
+            ),
             "State": "completed",
             "VolumeId": "vol-59b94d63",
             "VolumeSize": 10,
@@ -226,7 +246,9 @@ snapshots1 = {
             "OwnerId": "763630846467",
             "Progress": "100%",
             "SnapshotId": "snap-e9a6aae5",
-            "StartTime": "2019-12-19T17:18:54.429Z",
+            "StartTime": datetime.strptime(
+                "2019-12-19T17:18:54.429Z", "%Y-%m-%dT%H:%M:%S.%f%z"
+            ),
             "State": "completed",
             "VolumeId": "vol-59b94d63",
             "VolumeSize": 10,
@@ -238,7 +260,9 @@ snapshots1 = {
             "OwnerId": "763630846467",
             "Progress": "100%",
             "SnapshotId": "snap-70be5243",
-            "StartTime": "2019-12-19T17:20:23.850Z",
+            "StartTime": datetime.strptime(
+                "2019-12-19T17:20:23.850Z", "%Y-%m-%dT%H:%M:%S.%f%z"
+            ),
             "State": "completed",
             "VolumeId": "vol-59b94d63",
             "VolumeSize": 10,
@@ -255,7 +279,9 @@ snapshots2 = {
             "OwnerId": "763630846467",
             "Progress": "100%",
             "SnapshotId": "snap-8f3436c0",
-            "StartTime": "2019-12-19T16:02:21.165Z",
+            "StartTime": datetime.strptime(
+                "2019-12-19T16:02:21.165Z", "%Y-%m-%dT%H:%M:%S.%f%z"
+            ),
             "State": "completed",
             "VolumeId": "vol-640141cf",
             "VolumeSize": 10,
@@ -267,7 +293,9 @@ snapshots2 = {
             "OwnerId": "763630846467",
             "Progress": "100%",
             "SnapshotId": "snap-e6996c10",
-            "StartTime": "2019-12-19T16:50:08.496Z",
+            "StartTime": datetime.strptime(
+                "2019-12-19T16:50:08.496Z", "%Y-%m-%dT%H:%M:%S.%f%z"
+            ),
             "State": "completed",
             "VolumeId": "vol-640141cf",
             "VolumeSize": 10,
@@ -279,7 +307,9 @@ snapshots2 = {
             "OwnerId": "763630846467",
             "Progress": "100%",
             "SnapshotId": "snap-fa25ee50",
-            "StartTime": "2019-12-19T16:53:02.217Z",
+            "StartTime": datetime.strptime(
+                "2019-12-19T16:53:02.217Z", "%Y-%m-%dT%H:%M:%S.%f%z"
+            ),
             "State": "completed",
             "VolumeId": "vol-640141cf",
             "VolumeSize": 10,
@@ -291,7 +321,9 @@ snapshots2 = {
             "OwnerId": "763630846467",
             "Progress": "100%",
             "SnapshotId": "snap-5569bbaa",
-            "StartTime": "2019-12-19T17:21:04.153Z",
+            "StartTime": datetime.strptime(
+                "2019-12-19T17:21:04.153Z", "%Y-%m-%dT%H:%M:%S.%f%z"
+            ),
             "State": "completed",
             "VolumeId": "vol-640141cf",
             "VolumeSize": 10,
@@ -303,7 +335,9 @@ snapshots2 = {
             "OwnerId": "763630846467",
             "Progress": "100%",
             "SnapshotId": "snap-9c3c5d34",
-            "StartTime": "2019-12-19T16:56:18.452Z",
+            "StartTime": datetime.strptime(
+                "2019-12-19T16:56:18.452Z", "%Y-%m-%dT%H:%M:%S.%f%z"
+            ),
             "State": "completed",
             "VolumeId": "vol-640141cf",
             "VolumeSize": 10,
@@ -315,7 +349,9 @@ snapshots2 = {
             "OwnerId": "763630846467",
             "Progress": "100%",
             "SnapshotId": "snap-7729b15f",
-            "StartTime": "2019-12-19T16:57:00.779Z",
+            "StartTime": datetime.strptime(
+                "2019-12-19T16:57:00.779Z", "%Y-%m-%dT%H:%M:%S.%f%z"
+            ),
             "State": "completed",
             "VolumeId": "vol-640141cf",
             "VolumeSize": 10,
@@ -327,7 +363,9 @@ snapshots2 = {
             "OwnerId": "763630846467",
             "Progress": "100%",
             "SnapshotId": "snap-ecead238",
-            "StartTime": "2019-12-19T16:57:42.726Z",
+            "StartTime": datetime.strptime(
+                "2019-12-19T16:57:42.726Z", "%Y-%m-%dT%H:%M:%S.%f%z"
+            ),
             "State": "completed",
             "VolumeId": "vol-640141cf",
             "VolumeSize": 10,
@@ -339,7 +377,9 @@ snapshots2 = {
             "OwnerId": "763630846467",
             "Progress": "100%",
             "SnapshotId": "snap-445be4c7",
-            "StartTime": "2019-12-19T17:15:08.852Z",
+            "StartTime": datetime.strptime(
+                "2019-12-19T17:15:08.852Z", "%Y-%m-%dT%H:%M:%S.%f%z"
+            ),
             "State": "completed",
             "VolumeId": "vol-640141cf",
             "VolumeSize": 10,
@@ -351,7 +391,9 @@ snapshots2 = {
             "OwnerId": "763630846467",
             "Progress": "100%",
             "SnapshotId": "snap-e88add53",
-            "StartTime": "2019-12-19T17:18:52.419Z",
+            "StartTime": datetime.strptime(
+                "2019-12-19T17:18:52.419Z", "%Y-%m-%dT%H:%M:%S.%f%z"
+            ),
             "State": "completed",
             "VolumeId": "vol-640141cf",
             "VolumeSize": 10,
@@ -363,7 +405,9 @@ snapshots2 = {
             "OwnerId": "763630846467",
             "Progress": "100%",
             "SnapshotId": "snap-5e2e73c4",
-            "StartTime": "2019-12-19T17:18:26.086Z",
+            "StartTime": datetime.strptime(
+                "2019-12-19T17:18:26.086Z", "%Y-%m-%dT%H:%M:%S.%f%z"
+            ),
             "State": "completed",
             "VolumeId": "vol-640141cf",
             "VolumeSize": 10,
@@ -375,7 +419,9 @@ snapshots2 = {
             "OwnerId": "763630846467",
             "Progress": "100%",
             "SnapshotId": "snap-11d38c47",
-            "StartTime": "2019-12-19T17:19:49.081Z",
+            "StartTime": datetime.strptime(
+                "2019-12-19T17:19:49.081Z", "%Y-%m-%dT%H:%M:%S.%f%z"
+            ),
             "State": "completed",
             "VolumeId": "vol-640141cf",
             "VolumeSize": 10,
@@ -387,7 +433,9 @@ snapshots2 = {
             "OwnerId": "763630846467",
             "Progress": "100%",
             "SnapshotId": "snap-f3338f81",
-            "StartTime": "2019-12-19T17:20:21.762Z",
+            "StartTime": datetime.strptime(
+                "2019-12-19T17:20:21.762Z", "%Y-%m-%dT%H:%M:%S.%f%z"
+            ),
             "State": "completed",
             "VolumeId": "vol-640141cf",
             "VolumeSize": 10,
