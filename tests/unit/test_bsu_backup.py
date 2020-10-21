@@ -24,7 +24,12 @@ class TestBsuBackup(unittest.TestCase):
     def test_auth1(self):
         with patch("boto3.Session"):
             self.assertTrue(
-                bsu.auth(region="eu-west-2", profile="default", endpoint=None)
+                bsu.auth(
+                    region="eu-west-2",
+                    profile="default",
+                    client_cert=None,
+                    endpoint=None,
+                )
             )
 
         self.assertRaises(InputError, bsu.auth, "eu-west-3", "default", None)
@@ -115,7 +120,10 @@ class TestBsuBackup(unittest.TestCase):
                         {
                             "Name": "description",
                             "Values": [
-                                "osc-bsu-backup EF50CF3A80164A5EABAF8C78B2314C65"
+                                "osc-bsu-backup EF50CF3A80164A5EABAF8C78B2314C65",
+                                "osc-bsu-backup 0.1",
+                                "osc-bsu-backup 0.0.2",
+                                "osc-bsu-backup 0.0.1",
                             ],
                         },
                     ]
@@ -134,7 +142,10 @@ class TestBsuBackup(unittest.TestCase):
                         {
                             "Name": "description",
                             "Values": [
-                                "osc-bsu-backup EF50CF3A80164A5EABAF8C78B2314C65"
+                                "osc-bsu-backup EF50CF3A80164A5EABAF8C78B2314C65",
+                                "osc-bsu-backup 0.1",
+                                "osc-bsu-backup 0.0.2",
+                                "osc-bsu-backup 0.0.1",
                             ],
                         },
                     ]
@@ -145,7 +156,9 @@ class TestBsuBackup(unittest.TestCase):
             stubber.add_response("delete_snapshot", {}, {"SnapshotId": "snap-e6996c10"})
             stubber.add_response("delete_snapshot", {}, {"SnapshotId": "snap-8f3436c0"})
             self.assertEqual(
-                bsu.rotate_snapshots(self.ec2, ["vol-59b94d63", "vol-640141cf"], 8),
+                bsu.rotate_snapshots(
+                    self.ec2, ["vol-59b94d63", "vol-640141cf"], 8, True
+                ),
                 None,
             )
 
@@ -157,12 +170,6 @@ class TestBsuBackup(unittest.TestCase):
                 {
                     "Filters": [
                         {"Name": "volume-id", "Values": ["vol-59b94d63"]},
-                        {
-                            "Name": "description",
-                            "Values": [
-                                "osc-bsu-backup EF50CF3A80164A5EABAF8C78B2314C65"
-                            ],
-                        },
                     ]
                 },
             )
@@ -178,12 +185,6 @@ class TestBsuBackup(unittest.TestCase):
                 {
                     "Filters": [
                         {"Name": "volume-id", "Values": ["vol-59b94d63"]},
-                        {
-                            "Name": "description",
-                            "Values": [
-                                "osc-bsu-backup EF50CF3A80164A5EABAF8C78B2314C65"
-                            ],
-                        },
                     ]
                 },
             )
@@ -197,12 +198,6 @@ class TestBsuBackup(unittest.TestCase):
                 {
                     "Filters": [
                         {"Name": "volume-id", "Values": ["vol-59b94d63"]},
-                        {
-                            "Name": "description",
-                            "Values": [
-                                "osc-bsu-backup EF50CF3A80164A5EABAF8C78B2314C65"
-                            ],
-                        },
                     ]
                 },
             )
@@ -218,12 +213,6 @@ class TestBsuBackup(unittest.TestCase):
                 {
                     "Filters": [
                         {"Name": "volume-id", "Values": ["vol-59b94d63"]},
-                        {
-                            "Name": "description",
-                            "Values": [
-                                "osc-bsu-backup EF50CF3A80164A5EABAF8C78B2314C65"
-                            ],
-                        },
                     ]
                 },
             )
@@ -239,16 +228,40 @@ class TestBsuBackup(unittest.TestCase):
                 {
                     "Filters": [
                         {"Name": "volume-id", "Values": ["aaaa"]},
-                        {
-                            "Name": "description",
-                            "Values": [
-                                "osc-bsu-backup EF50CF3A80164A5EABAF8C78B2314C65"
-                            ],
-                        },
                     ]
                 },
             )
             self.assertEqual(bsu.rotate_snapshots(self.ec2, ["aaaa"], 14), None)
+
+    def test_rotate_days_snapshots1(self):
+        with Stubber(self.ec2) as stubber:
+            stubber.add_response(
+                "describe_snapshots",
+                fixtures.snapshots1,
+                {
+                    "Filters": [
+                        {"Name": "volume-id", "Values": ["vol-59b94d63"]},
+                    ]
+                },
+            )
+            stubber.add_response("delete_snapshot", {}, {"SnapshotId": "snap-cf4748a5"})
+
+            stubber.add_response(
+                "describe_snapshots",
+                fixtures.snapshots2,
+                {
+                    "Filters": [
+                        {"Name": "volume-id", "Values": ["vol-640141cf"]},
+                    ]
+                },
+            )
+
+            self.assertEqual(
+                bsu.rotate_days_snapshots(
+                    self.ec2, ["vol-59b94d63", "vol-640141cf"], 1, False
+                ),
+                None,
+            )
 
     def test_create_snapshots1(self):
         with Stubber(self.ec2) as stubber:

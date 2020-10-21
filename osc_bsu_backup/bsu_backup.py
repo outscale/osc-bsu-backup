@@ -1,6 +1,6 @@
 import botocore
 import boto3
-from datetime import datetime, timedelta
+from datetime import datetime, timezone, timedelta
 from osc_bsu_backup.utils import setup_logging
 from osc_bsu_backup.error import InputError
 
@@ -197,8 +197,8 @@ def rotate_days_snapshots(conn, volumes, rotate=10, rotate_only=False):
         if len(snaps["Snapshots"]) >= rotate and rotate >= 1:
             snaps["Snapshots"].sort(key=lambda x: x["StartTime"], reverse=True)
 
-            for i, snap in enumerate(snaps["Snapshots"], start=0):
-                if (datetime.now() - snap["StartTime"]) >= rotate:
+            for snap in snaps["Snapshots"]:
+                if (datetime.now(timezone.utc) - snap["StartTime"]).days >= rotate:
                     logger.info(
                         "deleting this snap: %s %s %s",
                         vol,
