@@ -9,6 +9,7 @@ import os
 import osc_bsu_backup.bsu_backup as bsu
 from osc_bsu_backup.error import InputError
 import tests.unit.fixtures_bsu_backup as fixtures
+from datetime import datetime, timezone
 
 
 class TestBsuBackup(unittest.TestCase):
@@ -256,12 +257,17 @@ class TestBsuBackup(unittest.TestCase):
                 },
             )
 
-            self.assertEqual(
-                bsu.rotate_days_snapshots(
-                    self.ec2, ["vol-59b94d63", "vol-640141cf"], 1, False
-                ),
-                None,
-            )
+            with patch("osc_bsu_backup.bsu_backup.datetime") as mock_date:
+                mock_date.now.return_value = datetime(
+                    year=2019, month=12, day=20, tzinfo=timezone.utc
+                )
+
+                self.assertEqual(
+                    bsu.rotate_days_snapshots(
+                        self.ec2, ["vol-59b94d63", "vol-640141cf"], 2, False
+                    ),
+                    None,
+                )
 
     def test_create_snapshots1(self):
         with Stubber(self.ec2) as stubber:
