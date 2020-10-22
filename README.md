@@ -35,15 +35,17 @@ make integration
 ## Usage
 
 ```bash
-INFO:osc_bsu_backup.cli:osc_bsu_backup: 0.0.2
+INFO:osc_bsu_backup.cli:osc_bsu_backup: 0.0.3
 usage: osc-bsu-backup [-h] [--instance-by-id INSTANCE_ID]
                       [--instances-by-tags INSTANCES_TAGS]
                       [--volume-by-id VOLUME_ID]
                       [--volumes-by-tags VOLUMES_TAGS] [--rotate ROTATE]
+                      [--rotate-by-days ROTATE_DAYS] [--rotate-only]
                       [--region REGION] [--endpoint ENDPOINT]
-                      [--profile PROFILE] [--debug]
+                      [--profile PROFILE] [--client-cert CLIENT_CERT]
+                      [--debug]
 
-osc-ebs-backup: 0.0.2
+osc-ebs-backup: 0.0.3
 
 optional arguments:
   -h, --help            show this help message and exit
@@ -56,9 +58,15 @@ optional arguments:
   --volumes-by-tags VOLUMES_TAGS
                         volumes tags to look for, use the format Key:Value
   --rotate ROTATE       retention for snapshot
+  --rotate-by-days ROTATE_DAYS
+                        retention for snapshot, delete snapshots if there are
+                        older than N days
+  --rotate-only         only rotate snapshots create by osc-bsu-backup
   --region REGION       region
   --endpoint ENDPOINT   endpoint
   --profile PROFILE     aws profile to use, ~/.aws/credentials
+  --client-cert CLIENT_CERT
+                        for TLS client authentication
   --debug               enable debug
 ```
 
@@ -72,6 +80,7 @@ it will only keep the seventh more recent snapshots
 ```bash
 #crontab -l
 5 2 * * * osc-bsu-backup --profile default --region eu-west-2 --rotate 7 --instances-by-tags 'autosnapshot:Yes'
+7 2 * * * osc-bsu-backup --profile default --region eu-west-2 --rotate 7 --client-cert /home/remi/test1.pem --instances-by-tags 'autosnapshot:Yes'
 ```
 
 ```bash
