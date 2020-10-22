@@ -1,4 +1,4 @@
-from datetime import datetime
+from datetime import datetime, timezone
 
 instances = {
     "Reservations": [
@@ -120,8 +120,15 @@ snapshots1 = {
             "OwnerId": "763630846467",
             "Progress": "100%",
             "SnapshotId": "snap-cf4748a5",
-            "StartTime": datetime.strptime(
-                "2019-12-17T16:02:22.204Z", "%Y-%m-%dT%H:%M:%S.%f%z"
+            "StartTime": datetime(
+                year=2019,
+                month=12,
+                day=17,
+                hour=16,
+                minute=2,
+                second=22,
+                microsecond=204,
+                tzinfo=timezone.utc,
             ),
             "State": "completed",
             "VolumeId": "vol-59b94d63",
@@ -134,8 +141,14 @@ snapshots1 = {
             "OwnerId": "763630846467",
             "Progress": "100%",
             "SnapshotId": "snap-04fd92f4",
-            "StartTime": datetime.strptime(
-                "2019-12-19T16:56:20.567Z", "%Y-%m-%dT%H:%M:%S.%f%z"
+            "StartTime": datetime(
+                year=2019,
+                month=12,
+                day=19,
+                hour=16,
+                minute=56,
+                second=20,
+                tzinfo=timezone.utc,
             ),
             "State": "completed",
             "VolumeId": "vol-59b94d63",
@@ -148,8 +161,14 @@ snapshots1 = {
             "OwnerId": "763630846467",
             "Progress": "100%",
             "SnapshotId": "snap-30e1c236",
-            "StartTime": datetime.strptime(
-                "2019-12-19T16:50:09.591Z", "%Y-%m-%dT%H:%M:%S.%f%z"
+            "StartTime": datetime(
+                year=2019,
+                month=12,
+                day=19,
+                hour=16,
+                minute=50,
+                second=9,
+                tzinfo=timezone.utc,
             ),
             "State": "completed",
             "VolumeId": "vol-59b94d63",
@@ -162,8 +181,14 @@ snapshots1 = {
             "OwnerId": "763630846467",
             "Progress": "100%",
             "SnapshotId": "snap-d5caf847",
-            "StartTime": datetime.strptime(
-                "2019-12-19T16:53:04.271Z", "%Y-%m-%dT%H:%M:%S.%f%z"
+            "StartTime": datetime(
+                year=2019,
+                month=12,
+                day=19,
+                hour=16,
+                minute=53,
+                second=4,
+                tzinfo=timezone.utc,
             ),
             "State": "completed",
             "VolumeId": "vol-59b94d63",
@@ -176,8 +201,14 @@ snapshots1 = {
             "OwnerId": "763630846467",
             "Progress": "100%",
             "SnapshotId": "snap-f820da70",
-            "StartTime": datetime.strptime(
-                "2019-12-19T16:57:03.137Z", "%Y-%m-%dT%H:%M:%S.%f%z"
+            "StartTime": datetime(
+                year=2019,
+                month=12,
+                day=19,
+                hour=16,
+                minute=57,
+                second=4,
+                tzinfo=timezone.utc,
             ),
             "State": "completed",
             "VolumeId": "vol-59b94d63",
@@ -190,8 +221,14 @@ snapshots1 = {
             "OwnerId": "763630846467",
             "Progress": "100%",
             "SnapshotId": "snap-e5b47810",
-            "StartTime": datetime.strptime(
-                "2019-12-19T16:57:44.663Z", "%Y-%m-%dT%H:%M:%S.%f%z"
+            "StartTime": datetime(
+                year=2019,
+                month=12,
+                day=19,
+                hour=16,
+                minute=57,
+                second=44,
+                tzinfo=timezone.utc,
             ),
             "State": "completed",
             "VolumeId": "vol-59b94d63",
@@ -204,8 +241,14 @@ snapshots1 = {
             "OwnerId": "763630846467",
             "Progress": "100%",
             "SnapshotId": "snap-16959493",
-            "StartTime": datetime.strptime(
-                "2019-12-19T17:21:06.316Z", "%Y-%m-%dT%H:%M:%S.%f%z"
+            "StartTime": datetime(
+                year=2019,
+                month=12,
+                day=19,
+                hour=17,
+                minute=21,
+                second=44,
+                tzinfo=timezone.utc,
             ),
             "State": "completed",
             "VolumeId": "vol-59b94d63",
@@ -218,8 +261,14 @@ snapshots1 = {
             "OwnerId": "763630846467",
             "Progress": "100%",
             "SnapshotId": "snap-a8fa23e2",
-            "StartTime": datetime.strptime(
-                "2019-12-19T17:15:09.910Z", "%Y-%m-%dT%H:%M:%S.%f%z"
+            "StartTime": datetime(
+                year=2019,
+                month=12,
+                day=19,
+                hour=17,
+                minute=15,
+                second=44,
+                tzinfo=timezone.utc,
             ),
             "State": "completed",
             "VolumeId": "vol-59b94d63",
@@ -232,8 +281,14 @@ snapshots1 = {
             "OwnerId": "763630846467",
             "Progress": "100%",
             "SnapshotId": "snap-14f3772c",
-            "StartTime": datetime.strptime(
-                "2019-12-19T17:18:27.772Z", "%Y-%m-%dT%H:%M:%S.%f%z"
+            "StartTime": datetime(
+                year=2019,
+                month=12,
+                day=19,
+                hour=17,
+                minute=18,
+                second=44,
+                tzinfo=timezone.utc,
             ),
             "State": "completed",
             "VolumeId": "vol-59b94d63",
@@ -246,8 +301,14 @@ snapshots1 = {
             "OwnerId": "763630846467",
             "Progress": "100%",
             "SnapshotId": "snap-e9a6aae5",
-            "StartTime": datetime.strptime(
-                "2019-12-19T17:18:54.429Z", "%Y-%m-%dT%H:%M:%S.%f%z"
+            "StartTime": datetime(
+                year=2019,
+                month=12,
+                day=19,
+                hour=17,
+                minute=18,
+                second=54,
+                tzinfo=timezone.utc,
             ),
             "State": "completed",
             "VolumeId": "vol-59b94d63",
@@ -260,8 +321,14 @@ snapshots1 = {
             "OwnerId": "763630846467",
             "Progress": "100%",
             "SnapshotId": "snap-70be5243",
-            "StartTime": datetime.strptime(
-                "2019-12-19T17:20:23.850Z", "%Y-%m-%dT%H:%M:%S.%f%z"
+            "StartTime": datetime(
+                year=2019,
+                month=12,
+                day=19,
+                hour=17,
+                minute=20,
+                second=54,
+                tzinfo=timezone.utc,
             ),
             "State": "completed",
             "VolumeId": "vol-59b94d63",
@@ -279,8 +346,14 @@ snapshots2 = {
             "OwnerId": "763630846467",
             "Progress": "100%",
             "SnapshotId": "snap-8f3436c0",
-            "StartTime": datetime.strptime(
-                "2019-12-19T16:02:21.165Z", "%Y-%m-%dT%H:%M:%S.%f%z"
+            "StartTime": datetime(
+                year=2019,
+                month=12,
+                day=19,
+                hour=16,
+                minute=02,
+                second=54,
+                tzinfo=timezone.utc,
             ),
             "State": "completed",
             "VolumeId": "vol-640141cf",
@@ -293,8 +366,14 @@ snapshots2 = {
             "OwnerId": "763630846467",
             "Progress": "100%",
             "SnapshotId": "snap-e6996c10",
-            "StartTime": datetime.strptime(
-                "2019-12-19T16:50:08.496Z", "%Y-%m-%dT%H:%M:%S.%f%z"
+            "StartTime": datetime(
+                year=2019,
+                month=12,
+                day=19,
+                hour=16,
+                minute=50,
+                second=8,
+                tzinfo=timezone.utc,
             ),
             "State": "completed",
             "VolumeId": "vol-640141cf",
@@ -307,8 +386,14 @@ snapshots2 = {
             "OwnerId": "763630846467",
             "Progress": "100%",
             "SnapshotId": "snap-fa25ee50",
-            "StartTime": datetime.strptime(
-                "2019-12-19T16:53:02.217Z", "%Y-%m-%dT%H:%M:%S.%f%z"
+            "StartTime": datetime(
+                year=2019,
+                month=12,
+                day=19,
+                hour=16,
+                minute=53,
+                second=2,
+                tzinfo=timezone.utc,
             ),
             "State": "completed",
             "VolumeId": "vol-640141cf",
@@ -321,8 +406,14 @@ snapshots2 = {
             "OwnerId": "763630846467",
             "Progress": "100%",
             "SnapshotId": "snap-5569bbaa",
-            "StartTime": datetime.strptime(
-                "2019-12-19T17:21:04.153Z", "%Y-%m-%dT%H:%M:%S.%f%z"
+            "StartTime": datetime(
+                year=2019,
+                month=12,
+                day=19,
+                hour=17,
+                minute=21,
+                second=4,
+                tzinfo=timezone.utc,
             ),
             "State": "completed",
             "VolumeId": "vol-640141cf",
@@ -335,8 +426,14 @@ snapshots2 = {
             "OwnerId": "763630846467",
             "Progress": "100%",
             "SnapshotId": "snap-9c3c5d34",
-            "StartTime": datetime.strptime(
-                "2019-12-19T16:56:18.452Z", "%Y-%m-%dT%H:%M:%S.%f%z"
+            "StartTime": datetime(
+                year=2019,
+                month=12,
+                day=19,
+                hour=16,
+                minute=56,
+                second=18,
+                tzinfo=timezone.utc,
             ),
             "State": "completed",
             "VolumeId": "vol-640141cf",
@@ -349,8 +446,14 @@ snapshots2 = {
             "OwnerId": "763630846467",
             "Progress": "100%",
             "SnapshotId": "snap-7729b15f",
-            "StartTime": datetime.strptime(
-                "2019-12-19T16:57:00.779Z", "%Y-%m-%dT%H:%M:%S.%f%z"
+            "StartTime": datetime(
+                year=2019,
+                month=12,
+                day=19,
+                hour=16,
+                minute=57,
+                second=1,
+                tzinfo=timezone.utc,
             ),
             "State": "completed",
             "VolumeId": "vol-640141cf",
@@ -363,8 +466,14 @@ snapshots2 = {
             "OwnerId": "763630846467",
             "Progress": "100%",
             "SnapshotId": "snap-ecead238",
-            "StartTime": datetime.strptime(
-                "2019-12-19T16:57:42.726Z", "%Y-%m-%dT%H:%M:%S.%f%z"
+            "StartTime": datetime(
+                year=2019,
+                month=12,
+                day=19,
+                hour=16,
+                minute=57,
+                second=40,
+                tzinfo=timezone.utc,
             ),
             "State": "completed",
             "VolumeId": "vol-640141cf",
@@ -377,8 +486,14 @@ snapshots2 = {
             "OwnerId": "763630846467",
             "Progress": "100%",
             "SnapshotId": "snap-445be4c7",
-            "StartTime": datetime.strptime(
-                "2019-12-19T17:15:08.852Z", "%Y-%m-%dT%H:%M:%S.%f%z"
+            "StartTime": datetime(
+                year=2019,
+                month=12,
+                day=19,
+                hour=17,
+                minute=15,
+                second=8,
+                tzinfo=timezone.utc,
             ),
             "State": "completed",
             "VolumeId": "vol-640141cf",
@@ -391,8 +506,14 @@ snapshots2 = {
             "OwnerId": "763630846467",
             "Progress": "100%",
             "SnapshotId": "snap-e88add53",
-            "StartTime": datetime.strptime(
-                "2019-12-19T17:18:52.419Z", "%Y-%m-%dT%H:%M:%S.%f%z"
+            "StartTime": datetime(
+                year=2019,
+                month=12,
+                day=19,
+                hour=17,
+                minute=18,
+                second=52,
+                tzinfo=timezone.utc,
             ),
             "State": "completed",
             "VolumeId": "vol-640141cf",
@@ -405,8 +526,14 @@ snapshots2 = {
             "OwnerId": "763630846467",
             "Progress": "100%",
             "SnapshotId": "snap-5e2e73c4",
-            "StartTime": datetime.strptime(
-                "2019-12-19T17:18:26.086Z", "%Y-%m-%dT%H:%M:%S.%f%z"
+            "StartTime": datetime(
+                year=2019,
+                month=12,
+                day=19,
+                hour=17,
+                minute=18,
+                second=26,
+                tzinfo=timezone.utc,
             ),
             "State": "completed",
             "VolumeId": "vol-640141cf",
@@ -419,8 +546,14 @@ snapshots2 = {
             "OwnerId": "763630846467",
             "Progress": "100%",
             "SnapshotId": "snap-11d38c47",
-            "StartTime": datetime.strptime(
-                "2019-12-19T17:19:49.081Z", "%Y-%m-%dT%H:%M:%S.%f%z"
+            "StartTime": datetime(
+                year=2019,
+                month=12,
+                day=19,
+                hour=17,
+                minute=19,
+                second=49,
+                tzinfo=timezone.utc,
             ),
             "State": "completed",
             "VolumeId": "vol-640141cf",
@@ -433,8 +566,14 @@ snapshots2 = {
             "OwnerId": "763630846467",
             "Progress": "100%",
             "SnapshotId": "snap-f3338f81",
-            "StartTime": datetime.strptime(
-                "2019-12-19T17:20:21.762Z", "%Y-%m-%dT%H:%M:%S.%f%z"
+            "StartTime": datetime(
+                year=2019,
+                month=12,
+                day=19,
+                hour=17,
+                minute=20,
+                second=21,
+                tzinfo=timezone.utc,
             ),
             "State": "completed",
             "VolumeId": "vol-640141cf",
