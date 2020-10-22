@@ -14,10 +14,10 @@ develop: virtualenv
 	./venv/bin/python setup.py develop
 
 unit: virtualenv format develop
-	./venv/bin/python -m unittest -v $$(ls tests/unit/test_*.py)
+	./venv/bin/python -m unittest -f -v $$(ls tests/unit/test_*.py)
 
 integration: virtualenv format develop
-	./venv/bin/python -m unittest -v $$(ls tests/integration/test_*.py)
+	./venv/bin/python -m unittest -f -v $$(ls tests/integration/test_*.py)
 
 wheel: virtualenv
 	./venv/bin/pip install wheel && ./venv/bin/python setup.py bdist_wheel
