@@ -9,7 +9,7 @@ logger = setup_logging(__name__)
 
 
 def backup(args):
-    conn = bsu_backup.auth(args.profile, args.region, args.endpoint, args.client_cert)
+    conn = bsu_backup.auth(args.profile, args.region, args.client_cert, args.endpoint)
 
     if args.instance_id:
         res = bsu_backup.find_instance_by_id(conn, args.instance_id)

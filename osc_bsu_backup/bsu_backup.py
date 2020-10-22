@@ -10,7 +10,7 @@ DESCRIPTION = "osc-bsu-backup EF50CF3A80164A5EABAF8C78B2314C65"
 OLD_DESCRIPTION = ["osc-bsu-backup 0.1", "osc-bsu-backup 0.0.2", "osc-bsu-backup 0.0.1"]
 
 
-def auth(profile, region, client_cert, endpoint=None):
+def auth(profile, region, client_cert=None, endpoint=None):
     default_region = ["us-east-2", "eu-west-2", "cn-southeast-1", "us-west-1"]
 
     if not endpoint and region in default_region:
