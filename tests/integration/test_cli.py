@@ -128,6 +128,9 @@ class TestIntegrationMethods(unittest.TestCase):
             region = "eu-west-2"
             endpoint = None
             rotate = 1
+            client_cert = None
+            rotate_only = False
+            rotate_days = None
 
         with patch("osc_bsu_backup.bsu_backup.DESCRIPTION", "osc_bsu_backup_27aaade4"):
             self.assertTrue(cli.backup(args()))
@@ -160,6 +163,9 @@ class TestIntegrationMethods(unittest.TestCase):
             region = "eu-west-2"
             endpoint = None
             rotate = 1
+            client_cert = None
+            rotate_only = False
+            rotate_days = None
 
         with patch("osc_bsu_backup.bsu_backup.DESCRIPTION", "osc_bsu_backup_27aaade4"):
             self.assertTrue(cli.backup(args()))
@@ -192,6 +198,9 @@ class TestIntegrationMethods(unittest.TestCase):
             region = "eu-west-2"
             endpoint = None
             rotate = 1
+            client_cert = None
+            rotate_only = False
+            rotate_days = None
 
         with patch("osc_bsu_backup.bsu_backup.DESCRIPTION", "osc_bsu_backup_27aaade4"):
             self.assertTrue(cli.backup(args()))
@@ -224,6 +233,9 @@ class TestIntegrationMethods(unittest.TestCase):
             region = "eu-west-2"
             endpoint = None
             rotate = 1
+            client_cert = None
+            rotate_only = False
+            rotate_days = None
 
         with patch("osc_bsu_backup.bsu_backup.DESCRIPTION", "osc_bsu_backup_27aaade4"):
             self.assertTrue(cli.backup(args()))

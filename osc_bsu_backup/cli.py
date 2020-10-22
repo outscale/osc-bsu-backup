@@ -21,11 +21,11 @@ def backup(args):
         res = bsu_backup.find_volumes_by_tags(conn, args.volumes_tags)
 
     if res:
-        if rotate_days:
+        if args.rotate_days:
             bsu_backup.rotate_days_snapshots(
                 conn, res, args.rotate_days, args.rotate_only
             )
-        elif rotate:
+        elif args.rotate:
             bsu_backup.rotate_snapshots(conn, res, args.rotate, args.rotate_only)
         else:
             bsu_backup.rotate_snapshots(conn, res, 10, args.rotate_only)
