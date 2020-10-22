@@ -351,7 +351,7 @@ snapshots2 = {
                 month=12,
                 day=19,
                 hour=16,
-                minute=02,
+                minute=2,
                 second=54,
                 tzinfo=timezone.utc,
             ),
