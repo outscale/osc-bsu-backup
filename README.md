@@ -90,3 +90,65 @@ aws_access_key_id = NABUAZEYBFZEBAZF6554631
 aws_secret_access_key = AIGFABUIBZF10354AZF3A1CZ53A
 ```
 
+## Eim policy
+
+```json
+{
+    "Statement": [
+        {
+            "Action": [
+                "ec2:DescribeKeyPairs"
+            ],
+            "Resource": [
+                "*"
+            ],
+            "Effect": "Allow"
+        },
+        {
+            "Action": [
+                "ec2:CreateSnapshot"
+            ],
+            "Resource": [
+                "*"
+            ],
+            "Effect": "Allow"
+        },
+        {
+            "Action": [
+                "ec2:DescribeInstances"
+            ],
+            "Resource": [
+                "*"
+            ],
+            "Effect": "Allow"
+        },
+        {
+            "Action": [
+                "ec2:DescribeVolumes"
+            ],
+            "Resource": [
+                "*"
+            ],
+            "Effect": "Allow"
+        },
+        {
+            "Action": [
+                "ec2:DescribeSnapshots"
+            ],
+            "Resource": [
+                "*"
+            ],
+            "Effect": "Allow"
+        },
+        {
+            "Action": [
+                "ec2:DeleteSnapshot"
+            ],
+            "Resource": [
+                "*"
+            ],
+            "Effect": "Allow"
+        }
+    ]
+}
+```
