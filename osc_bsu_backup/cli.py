@@ -51,7 +51,8 @@ def main():
         "--instances-by-tags",
         dest="instances_tags",
         action="store",
-        help="instances tags to look for, use the format Key:Value",
+        nargs="+",
+        help="instances tags to look for, use the format Key:Value. Can be used multiple times",
     )
     parser.add_argument(
         "--volume-by-id",
@@ -63,7 +64,8 @@ def main():
         "--volumes-by-tags",
         dest="volumes_tags",
         action="store",
-        help="volumes tags to look for, use the format Key:Value",
+        nargs="+",
+        help="volumes tags to look for, use the format Key:Value. Can be used multiple times",
     )
     parser.add_argument(
         "--rotate",
@@ -113,14 +115,18 @@ def main():
     )
     args = parser.parse_args()
 
-    if args.instances_tags and len(args.instances_tags.split(":")) != 2:
-        parser.error(
-            "please use the format Key:Value for tags: --instances-by-tags Name:vm-1"
-        )
-    elif args.volumes_tags and len(args.volumes_tags.split(":")) != 2:
-        parser.error(
-            "please use the format Key:Value for tags: --volumes-by-tags Name:vm-1"
-        )
+    if args.instances_tags:
+        for tag in args.instances_tags:
+            if len(tag.split(":")) != 2:
+                parser.error(
+                        "please use the format Key:Value for tags: --instances-by-tags Name:vm-1"
+                )
+    elif args.volumes_tags:
+        for tag in args.volumes_tags:
+            if len(tag.split(":")) != 2:
+                parser.error(
+                        "please use the format Key:Value for tags: --volumes-by-tags Name:vm-1"
+                )
     elif (
         not args.instance_id
         and not args.instances_tags

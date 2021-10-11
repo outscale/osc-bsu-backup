@@ -76,15 +76,21 @@ def find_instance_by_id(conn, id):
 
 def find_instances_by_tags(conn, tags):
     logger.info("find the instance by tags: %s", tags)
-    tag_key = tags.split(":")[0]
-    tag_value = tags.split(":")[1]
+
     volumes = []
+    filters = [
+            {"Name": "instance-state-name", "Values": ["running", "stopped"]},
+    ]
+
+    for tag in tags:
+        tag_key = tag.split(":")[0]
+        tag_value = tag.split(":")[1]
+        filters.append(
+            {"Name": "tag:{}".format(tag_key), "Values": [tag_value]}
+        )
 
     reservations = conn.describe_instances(
-        Filters=[
-            {"Name": "tag:{}".format(tag_key), "Values": [tag_value]},
-            {"Name": "instance-state-name", "Values": ["running", "stopped"]},
-        ]
+        Filters=filters
     )
 
     if reservations:
@@ -108,12 +114,19 @@ def find_instances_by_tags(conn, tags):
 
 def find_volumes_by_tags(conn, tags):
     logger.info("find the volume by tags: %s", tags)
-    tag_key = tags.split(":")[0]
-    tag_value = tags.split(":")[1]
+
     volumes = []
+    filters = []
+
+    for tag in tags:
+        tag_key = tag.split(":")[0]
+        tag_value = tag.split(":")[1]
+        filters.append(
+            {"Name": "tag:{}".format(tag_key), "Values": [tag_value]}
+        )
 
     vol = conn.describe_volumes(
-        Filters=[{"Name": "tag:{}".format(tag_key), "Values": [tag_value]}]
+        Filters=filters
     )
 
     if len(vol["Volumes"]) != 0:
