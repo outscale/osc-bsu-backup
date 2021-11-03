@@ -16,10 +16,13 @@ class TestIntegrationMethods(unittest.TestCase):
         )
         self.region = "eu-west-2"
         endpoint = "https://fcu.eu-west-2.outscale.com"
+        config = botocore.config.Config(
+            retries={"max_attempts": 10, "mode": "standard"}
+        )
 
         session = boto3.Session()
         self.conn = session.client(
-            "ec2", region_name=self.region, endpoint_url=endpoint
+            "ec2", region_name=self.region, endpoint_url=endpoint, config=config
         )
 
         self.tearDown()
@@ -158,7 +161,10 @@ class TestIntegrationMethods(unittest.TestCase):
             volume_id = None
             instance_id = None
             instances_tags = None
-            volumes_tags = "test2:osc_bsu_backup_27aaade4"
+            volumes_tags = [
+                "test2:osc_bsu_backup_27aaade4",
+                "Name:osc_bsu_backup_27aaade4",
+            ]
             profile = None
             region = "eu-west-2"
             endpoint = None
@@ -227,7 +233,7 @@ class TestIntegrationMethods(unittest.TestCase):
         class args(object):
             volume_id = None
             instance_id = None
-            instances_tags = "test2:osc_bsu_backup_27aaade4"
+            instances_tags = ["test2:osc_bsu_backup_27aaade4"]
             volumes_tags = None
             profile = None
             region = "eu-west-2"

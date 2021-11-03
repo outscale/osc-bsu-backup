@@ -119,13 +119,13 @@ def main():
         for tag in args.instances_tags:
             if len(tag.split(":")) != 2:
                 parser.error(
-                        "please use the format Key:Value for tags: --instances-by-tags Name:vm-1"
+                    "please use the format Key:Value for tags: --instances-by-tags Name:vm-1"
                 )
     elif args.volumes_tags:
         for tag in args.volumes_tags:
             if len(tag.split(":")) != 2:
                 parser.error(
-                        "please use the format Key:Value for tags: --volumes-by-tags Name:vm-1"
+                    "please use the format Key:Value for tags: --volumes-by-tags Name:vm-1"
                 )
     elif (
         not args.instance_id

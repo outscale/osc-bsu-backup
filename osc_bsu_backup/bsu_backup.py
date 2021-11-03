@@ -79,19 +79,15 @@ def find_instances_by_tags(conn, tags):
 
     volumes = []
     filters = [
-            {"Name": "instance-state-name", "Values": ["running", "stopped"]},
+        {"Name": "instance-state-name", "Values": ["running", "stopped"]},
     ]
 
     for tag in tags:
         tag_key = tag.split(":")[0]
         tag_value = tag.split(":")[1]
-        filters.append(
-            {"Name": "tag:{}".format(tag_key), "Values": [tag_value]}
-        )
+        filters.append({"Name": "tag:{}".format(tag_key), "Values": [tag_value]})
 
-    reservations = conn.describe_instances(
-        Filters=filters
-    )
+    reservations = conn.describe_instances(Filters=filters)
 
     if reservations:
         for reservation in reservations["Reservations"]:
@@ -121,13 +117,9 @@ def find_volumes_by_tags(conn, tags):
     for tag in tags:
         tag_key = tag.split(":")[0]
         tag_value = tag.split(":")[1]
-        filters.append(
-            {"Name": "tag:{}".format(tag_key), "Values": [tag_value]}
-        )
+        filters.append({"Name": "tag:{}".format(tag_key), "Values": [tag_value]})
 
-    vol = conn.describe_volumes(
-        Filters=filters
-    )
+    vol = conn.describe_volumes(Filters=filters)
 
     if len(vol["Volumes"]) != 0:
         for vol in vol["Volumes"]:

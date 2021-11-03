@@ -29,6 +29,19 @@ class TestCliMethods(unittest.TestCase):
     def test_cli3(self):
         self.assertRaises(botocore.exceptions.ProfileNotFound, cli.main)
 
+    @patch(
+        "sys.argv",
+        [
+            sys.argv[0],
+            "--instance-by-tags",
+            "Name:test",
+            "--instance-by-tags",
+            "Nam1:test1",
+        ],
+    )
+    def test_cli4(self):
+        self.assertTrue(cli.main)
+
 
 if __name__ == "__main__":
     unittest.main()
