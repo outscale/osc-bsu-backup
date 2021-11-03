@@ -90,6 +90,13 @@ aws_access_key_id = NABUAZEYBFZEBAZF6554631
 aws_secret_access_key = AIGFABUIBZF10354AZF3A1CZ53A
 ```
 
+Environment variables could be used for authentication instead of aws profile. Set these environment variables (the `--profile` option should not be set):
+
+```
+AWS_ACCESS_KEY_ID=NABUAZEYBFZEBAZF6554631
+AWS_SECRET_ACCESS_KEY=AIGFABUIBZF10354AZF3A1CZ53A
+```
+
 ## Eim policy
 
 ```json
