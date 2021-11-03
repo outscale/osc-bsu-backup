@@ -98,8 +98,8 @@ def main():
         "--profile",
         dest="profile",
         action="store",
-        default="default",
-        help="aws profile to use, ~/.aws/credentials",
+        default=None,
+        help="aws profile to use, ~/.aws/credentials. Don't set to use environment variables",
     ),
     parser.add_argument(
         "--client-cert",
