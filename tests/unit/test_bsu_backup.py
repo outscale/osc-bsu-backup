@@ -63,15 +63,15 @@ class TestBsuBackup(unittest.TestCase):
                 fixtures.instances,
                 {
                     "Filters": [
-                        {"Name": "tag:Name", "Values": ["test1"]},
                         {
                             "Name": "instance-state-name",
                             "Values": ["running", "stopped"],
                         },
+                        {"Name": "tag:Name", "Values": ["test1"]},
                     ]
                 },
             )
-            for i in bsu.find_instances_by_tags(self.ec2, "Name:test1"):
+            for i in bsu.find_instances_by_tags(self.ec2, ["Name:test1"]):
                 self.assertEqual(i, "vol-a87f91c1")
 
     def test_find_volume_by_id1(self):
@@ -97,7 +97,7 @@ class TestBsuBackup(unittest.TestCase):
                 fixtures.volumes,
                 {"Filters": [{"Name": "tag:Name", "Values": ["test1"]}]},
             )
-            for i in bsu.find_volumes_by_tags(self.ec2, "Name:test1"):
+            for i in bsu.find_volumes_by_tags(self.ec2, ["Name:test1"]):
                 self.assertEqual(i, "vol-a24fffdc")
 
     def test_find_volumes_by_tags2(self):
@@ -107,7 +107,7 @@ class TestBsuBackup(unittest.TestCase):
                 {"Volumes": []},
                 {"Filters": [{"Name": "tag:Name", "Values": ["abc"]}]},
             )
-            for i in bsu.find_volumes_by_tags(self.ec2, "Name:abc"):
+            for i in bsu.find_volumes_by_tags(self.ec2, ["Name:abc"]):
                 self.assertEqual(i, None)
 
     def test_rotate_snapshots1(self):

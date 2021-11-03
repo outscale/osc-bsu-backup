@@ -35,28 +35,30 @@ make integration
 ## Usage
 
 ```bash
-INFO:osc_bsu_backup.cli:osc_bsu_backup: 0.0.3
+INFO:osc_bsu_backup.cli:osc_bsu_backup: 0.0.4
 usage: osc-bsu-backup [-h] [--instance-by-id INSTANCE_ID]
-                      [--instances-by-tags INSTANCES_TAGS]
+                      [--instances-by-tags INSTANCES_TAGS [INSTANCES_TAGS ...]]
                       [--volume-by-id VOLUME_ID]
-                      [--volumes-by-tags VOLUMES_TAGS] [--rotate ROTATE]
-                      [--rotate-by-days ROTATE_DAYS] [--rotate-only]
-                      [--region REGION] [--endpoint ENDPOINT]
+                      [--volumes-by-tags VOLUMES_TAGS [VOLUMES_TAGS ...]]
+                      [--rotate ROTATE] [--rotate-by-days ROTATE_DAYS]
+                      [--rotate-only] [--region REGION] [--endpoint ENDPOINT]
                       [--profile PROFILE] [--client-cert CLIENT_CERT]
                       [--debug]
 
-osc-ebs-backup: 0.0.3
+osc-ebs-backup: 0.0.4
 
 optional arguments:
   -h, --help            show this help message and exit
   --instance-by-id INSTANCE_ID
                         instance to backup
-  --instances-by-tags INSTANCES_TAGS
-                        instances tags to look for, use the format Key:Value
+  --instances-by-tags INSTANCES_TAGS [INSTANCES_TAGS ...]
+                        instances tags to look for, use the format Key:Value.
+                        Can be used multiple times
   --volume-by-id VOLUME_ID
                         volume to backup
-  --volumes-by-tags VOLUMES_TAGS
-                        volumes tags to look for, use the format Key:Value
+  --volumes-by-tags VOLUMES_TAGS [VOLUMES_TAGS ...]
+                        volumes tags to look for, use the format Key:Value.
+                        Can be used multiple times
   --rotate ROTATE       retention for snapshot
   --rotate-by-days ROTATE_DAYS
                         retention for snapshot, delete snapshots if there are
@@ -64,7 +66,8 @@ optional arguments:
   --rotate-only         only rotate snapshots create by osc-bsu-backup
   --region REGION       region
   --endpoint ENDPOINT   endpoint
-  --profile PROFILE     aws profile to use, ~/.aws/credentials
+  --profile PROFILE     aws profile to use, ~/.aws/credentials. Don't set to
+                        use environment variables
   --client-cert CLIENT_CERT
                         for TLS client authentication
   --debug               enable debug
@@ -81,6 +84,7 @@ it will only keep the seventh more recent snapshots
 #crontab -l
 5 2 * * * osc-bsu-backup --profile default --region eu-west-2 --rotate 7 --instances-by-tags 'autosnapshot:Yes'
 7 2 * * * osc-bsu-backup --profile default --region eu-west-2 --rotate 7 --client-cert /home/remi/test1.pem --instances-by-tags 'autosnapshot:Yes'
+4 2 * * * osc-bsu-backup --profile default --region eu-west-2 --rotate 7 --client-cert /home/remi/test1.pem --instances-by-tags 'autosnapshot:Yes' --instances-by-tags 'Name:test1'
 ```
 
 ```bash
