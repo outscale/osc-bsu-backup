@@ -227,7 +227,7 @@ def rotate_days_snapshots(conn, volumes, rotate=10, rotate_only=False):
                     )
 
 
-def create_snapshots(conn, volumes):
+def create_snapshots(conn, volumes, copy_tags=False):
     logger.info("create_snapshot")
 
     snaps = []
@@ -237,6 +237,11 @@ def create_snapshots(conn, volumes):
 
         logger.info("snap create: %s %s", vol, snap["SnapshotId"])
         snaps.append(snap)
+
+        if copy_tags:
+            vol_tags = conn.describe_volumes(VolumeIds=[vol])['Volumes'][0]['Tags']
+            conn.create_tags(Resources=[snap["SnapshotId"]], Tags=vol_tags)
+            logger.info("copy of %s tags to %s", vol, snap["SnapshotId"])
 
     logger.info("wait for snapshots: %s", [i["SnapshotId"] for i in snaps])
     waiter = conn.get_waiter("snapshot_completed")

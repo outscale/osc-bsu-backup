@@ -30,7 +30,7 @@ def backup(args):
         else:
             bsu_backup.rotate_snapshots(conn, res, 10, args.rotate_only)
 
-        bsu_backup.create_snapshots(conn, res)
+        bsu_backup.create_snapshots(conn, res, args.copy_tags)
 
     return True
 
@@ -89,6 +89,13 @@ def main():
         action="store_true",
         default=False,
         help="only rotate snapshots create by osc-bsu-backup",
+    )
+    parser.add_argument(
+        "--copy-tags",
+        dest="copy_tags",
+        action="store_true",
+        default=False,
+        help="copy the volume tags to the created snapshots",
     )
     parser.add_argument(
         "--region", dest="region", action="store", default="eu-west-2", help="region"
