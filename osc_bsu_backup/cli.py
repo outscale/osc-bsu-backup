@@ -32,8 +32,6 @@ def backup(args):
 
         bsu_backup.create_snapshots(conn, res, args.copy_tags)
 
-    return True
-
 
 def main():
     logger.info("osc_bsu_backup: %s", __version__)
