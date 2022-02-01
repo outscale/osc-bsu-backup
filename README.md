@@ -42,6 +42,7 @@ usage: osc-bsu-backup [-h] [--instance-by-id INSTANCE_ID]
                       [--volumes-by-tags VOLUMES_TAGS [VOLUMES_TAGS ...]]
                       [--rotate ROTATE] [--rotate-by-days ROTATE_DAYS]
                       [--rotate-only] [--region REGION] [--endpoint ENDPOINT]
+                      [--copy-tags]
                       [--profile PROFILE] [--client-cert CLIENT_CERT]
                       [--debug]
 
@@ -64,6 +65,7 @@ optional arguments:
                         retention for snapshot, delete snapshots if there are
                         older than N days
   --rotate-only         only rotate snapshots create by osc-bsu-backup
+  --copy-tags           copy the volume tags to the created snapshots
   --region REGION       region
   --endpoint ENDPOINT   endpoint
   --profile PROFILE     aws profile to use, ~/.aws/credentials. Don't set to
