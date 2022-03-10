@@ -26,8 +26,8 @@ make unit
 #you must have an account on the region eu-west-2 from Outscale
 #~/.aws/credentials
 [default]
-aws_access_key_id = NABUAZEYBFZEBAZF6554631
-aws_secret_access_key = AIGFABUIBZF10354AZF3A1CZ53A
+aws_access_key_id = XXX_ACCESS_KEY_XXX
+aws_secret_access_key = XXX_SECRET_KEY_XXX
 
 make integration
 ```
@@ -92,15 +92,15 @@ it will only keep the seventh more recent snapshots
 ```bash
 #~/.aws/credentials
 [default]
-aws_access_key_id = NABUAZEYBFZEBAZF6554631
-aws_secret_access_key = AIGFABUIBZF10354AZF3A1CZ53A
+aws_access_key_id = XXX_ACCESS_KEY_XXX
+aws_secret_access_key = XXX_SECRET_KEY_XXX
 ```
 
 Environment variables could be used for authentication instead of aws profile. Set these environment variables (the `--profile` option should not be set):
 
 ```
-AWS_ACCESS_KEY_ID=NABUAZEYBFZEBAZF6554631
-AWS_SECRET_ACCESS_KEY=AIGFABUIBZF10354AZF3A1CZ53A
+AWS_ACCESS_KEY_ID=XXX_ACCESS_KEY_XXX
+AWS_SECRET_ACCESS_KEY=XXX_SECRET_KEY_XXX
 ```
 
 ## Eim policy
