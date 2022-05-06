@@ -119,7 +119,7 @@ class TestIntegrationMethods(unittest.TestCase):
             ],
         )
 
-    def test_integration1(self):
+    def test_integration_volume_id(self):
         self.setUpVolumes()
 
         class args(object):
@@ -155,7 +155,7 @@ class TestIntegrationMethods(unittest.TestCase):
             )
             self.assertEqual(len(snaps["Snapshots"]), 2)
 
-    def test_integration2(self):
+    def test_integration_volume_tags1(self):
         self.setUpVolumes()
 
         class args(object):
@@ -194,7 +194,7 @@ class TestIntegrationMethods(unittest.TestCase):
             )
             self.assertEqual(len(snaps["Snapshots"]), 4)
 
-    def test_integration3(self):
+    def test_integration_instance_id(self):
         self.setUpInstances(count=1)
 
         class args(object):
@@ -230,7 +230,7 @@ class TestIntegrationMethods(unittest.TestCase):
             )
             self.assertEqual(len(snaps["Snapshots"]), 2)
 
-    def test_integration4(self):
+    def test_integration_instance_tags(self):
         self.setUpInstances(count=4)
 
         class args(object):
@@ -265,6 +265,40 @@ class TestIntegrationMethods(unittest.TestCase):
                 Filters=[{"Name": "description", "Values": ["osc_bsu_backup_27aaade4"]}]
             )
             self.assertEqual(len(snaps["Snapshots"]), 8)
+
+    def test_integration_copy_tags(self):
+        self.setUpVolumes()
+
+        class args(object):
+            volume_id = None
+            instance_id = None
+            instances_tags = None
+            volumes_tags = [
+                "test2:osc_bsu_backup_27aaade4",
+                "Name:osc_bsu_backup_27aaade4",
+            ]
+            profile = None
+            region = "eu-west-2"
+            endpoint = None
+            rotate = 1
+            client_cert = None
+            rotate_only = False
+            rotate_days = None
+            copy_tags = True
+
+        with patch("osc_bsu_backup.bsu_backup.DESCRIPTION", "osc_bsu_backup_27aaade4"):
+            self.assertIsNone(cli.backup(args()))
+            snaps = self.conn.describe_snapshots(
+                Filters=[{"Name": "description", "Values": ["osc_bsu_backup_27aaade4"]}]
+            )
+            self.assertEqual(len(snaps["Snapshots"]), 2)
+            self.assertEqual(
+                snaps["Snapshots"][0]["Tags"],
+                [
+                    {"Key": "Name", "Value": "osc_bsu_backup_27aaade4"},
+                    {"Key": "test2", "Value": "osc_bsu_backup_27aaade4"},
+                ],
+            )
 
 
 if __name__ == "__main__":
