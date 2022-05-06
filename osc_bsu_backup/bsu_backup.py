@@ -239,7 +239,7 @@ def create_snapshots(conn, volumes, copy_tags=False):
         snaps.append(snap)
 
         if copy_tags:
-            vol_tags = conn.describe_volumes(VolumeIds=[vol])['Volumes'][0]['Tags']
+            vol_tags = conn.describe_volumes(VolumeIds=[vol])["Volumes"][0]["Tags"]
             conn.create_tags(Resources=[snap["SnapshotId"]], Tags=vol_tags)
             logger.info("copy of %s tags to %s", vol, snap["SnapshotId"])
 

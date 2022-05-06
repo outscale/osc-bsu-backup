@@ -134,21 +134,22 @@ class TestIntegrationMethods(unittest.TestCase):
             client_cert = None
             rotate_only = False
             rotate_days = None
+            copy_tags = False
 
         with patch("osc_bsu_backup.bsu_backup.DESCRIPTION", "osc_bsu_backup_27aaade4"):
-            self.assertTrue(cli.backup(args()))
+            self.assertIsNone(cli.backup(args()))
             snaps = self.conn.describe_snapshots(
                 Filters=[{"Name": "description", "Values": ["osc_bsu_backup_27aaade4"]}]
             )
             self.assertEqual(len(snaps["Snapshots"]), 1)
 
-            self.assertTrue(cli.backup(args()))
+            self.assertIsNone(cli.backup(args()))
             snaps = self.conn.describe_snapshots(
                 Filters=[{"Name": "description", "Values": ["osc_bsu_backup_27aaade4"]}]
             )
             self.assertEqual(len(snaps["Snapshots"]), 2)
 
-            self.assertTrue(cli.backup(args()))
+            self.assertIsNone(cli.backup(args()))
             snaps = self.conn.describe_snapshots(
                 Filters=[{"Name": "description", "Values": ["osc_bsu_backup_27aaade4"]}]
             )
@@ -172,21 +173,22 @@ class TestIntegrationMethods(unittest.TestCase):
             client_cert = None
             rotate_only = False
             rotate_days = None
+            copy_tags = False
 
         with patch("osc_bsu_backup.bsu_backup.DESCRIPTION", "osc_bsu_backup_27aaade4"):
-            self.assertTrue(cli.backup(args()))
+            self.assertIsNone(cli.backup(args()))
             snaps = self.conn.describe_snapshots(
                 Filters=[{"Name": "description", "Values": ["osc_bsu_backup_27aaade4"]}]
             )
             self.assertEqual(len(snaps["Snapshots"]), 2)
 
-            self.assertTrue(cli.backup(args()))
+            self.assertIsNone(cli.backup(args()))
             snaps = self.conn.describe_snapshots(
                 Filters=[{"Name": "description", "Values": ["osc_bsu_backup_27aaade4"]}]
             )
             self.assertEqual(len(snaps["Snapshots"]), 4)
 
-            self.assertTrue(cli.backup(args()))
+            self.assertIsNone(cli.backup(args()))
             snaps = self.conn.describe_snapshots(
                 Filters=[{"Name": "description", "Values": ["osc_bsu_backup_27aaade4"]}]
             )
@@ -207,21 +209,22 @@ class TestIntegrationMethods(unittest.TestCase):
             client_cert = None
             rotate_only = False
             rotate_days = None
+            copy_tags = False
 
         with patch("osc_bsu_backup.bsu_backup.DESCRIPTION", "osc_bsu_backup_27aaade4"):
-            self.assertTrue(cli.backup(args()))
+            self.assertIsNone(cli.backup(args()))
             snaps = self.conn.describe_snapshots(
                 Filters=[{"Name": "description", "Values": ["osc_bsu_backup_27aaade4"]}]
             )
             self.assertEqual(len(snaps["Snapshots"]), 1)
 
-            self.assertTrue(cli.backup(args()))
+            self.assertIsNone(cli.backup(args()))
             snaps = self.conn.describe_snapshots(
                 Filters=[{"Name": "description", "Values": ["osc_bsu_backup_27aaade4"]}]
             )
             self.assertEqual(len(snaps["Snapshots"]), 2)
 
-            self.assertTrue(cli.backup(args()))
+            self.assertIsNone(cli.backup(args()))
             snaps = self.conn.describe_snapshots(
                 Filters=[{"Name": "description", "Values": ["osc_bsu_backup_27aaade4"]}]
             )
@@ -242,21 +245,22 @@ class TestIntegrationMethods(unittest.TestCase):
             client_cert = None
             rotate_only = False
             rotate_days = None
+            copy_tags = False
 
         with patch("osc_bsu_backup.bsu_backup.DESCRIPTION", "osc_bsu_backup_27aaade4"):
-            self.assertTrue(cli.backup(args()))
+            self.assertIsNone(cli.backup(args()))
             snaps = self.conn.describe_snapshots(
                 Filters=[{"Name": "description", "Values": ["osc_bsu_backup_27aaade4"]}]
             )
             self.assertEqual(len(snaps["Snapshots"]), 4)
 
-            self.assertTrue(cli.backup(args()))
+            self.assertIsNone(cli.backup(args()))
             snaps = self.conn.describe_snapshots(
                 Filters=[{"Name": "description", "Values": ["osc_bsu_backup_27aaade4"]}]
             )
             self.assertEqual(len(snaps["Snapshots"]), 8)
 
-            self.assertTrue(cli.backup(args()))
+            self.assertIsNone(cli.backup(args()))
             snaps = self.conn.describe_snapshots(
                 Filters=[{"Name": "description", "Values": ["osc_bsu_backup_27aaade4"]}]
             )
