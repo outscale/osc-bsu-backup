@@ -35,41 +35,31 @@ make integration
 ## Usage
 
 ```bash
-INFO:osc_bsu_backup.cli:osc_bsu_backup: 0.0.4
-usage: osc-bsu-backup [-h] [--instance-by-id INSTANCE_ID]
-                      [--instances-by-tags INSTANCES_TAGS [INSTANCES_TAGS ...]]
-                      [--volume-by-id VOLUME_ID]
-                      [--volumes-by-tags VOLUMES_TAGS [VOLUMES_TAGS ...]]
-                      [--rotate ROTATE] [--rotate-by-days ROTATE_DAYS]
-                      [--rotate-only] [--region REGION] [--endpoint ENDPOINT]
-                      [--copy-tags]
-                      [--profile PROFILE] [--client-cert CLIENT_CERT]
-                      [--debug]
+INFO:osc_bsu_backup.cli:osc_bsu_backup: 0.0.5
+usage: osc-bsu-backup [-h] [--instance-by-id INSTANCE_ID] [--instances-by-tags INSTANCES_TAGS [INSTANCES_TAGS ...]] [--volume-by-id VOLUME_ID]
+                      [--volumes-by-tags VOLUMES_TAGS [VOLUMES_TAGS ...]] [--rotate ROTATE] [--rotate-by-days ROTATE_DAYS] [--rotate-only] [--copy-tags]
+                      [--region REGION] [--endpoint ENDPOINT] [--profile PROFILE] [--client-cert CLIENT_CERT] [--debug]
 
-osc-ebs-backup: 0.0.4
+osc-bsu-backup: 0.0.5
 
 optional arguments:
   -h, --help            show this help message and exit
   --instance-by-id INSTANCE_ID
                         instance to backup
   --instances-by-tags INSTANCES_TAGS [INSTANCES_TAGS ...]
-                        instances tags to look for, use the format Key:Value.
-                        Can be used multiple times
+                        instances tags to look for, use the format Key:Value. Can be used multiple times
   --volume-by-id VOLUME_ID
                         volume to backup
   --volumes-by-tags VOLUMES_TAGS [VOLUMES_TAGS ...]
-                        volumes tags to look for, use the format Key:Value.
-                        Can be used multiple times
+                        volumes tags to look for, use the format Key:Value. Can be used multiple times
   --rotate ROTATE       retention for snapshot
   --rotate-by-days ROTATE_DAYS
-                        retention for snapshot, delete snapshots if there are
-                        older than N days
+                        retention for snapshot, delete snapshots if there are older than N days
   --rotate-only         only rotate snapshots create by osc-bsu-backup
   --copy-tags           copy the volume tags to the created snapshots
   --region REGION       region
   --endpoint ENDPOINT   endpoint
-  --profile PROFILE     aws profile to use, ~/.aws/credentials. Don't set to
-                        use environment variables
+  --profile PROFILE     aws profile to use, ~/.aws/credentials. Don't set to use environment variables
   --client-cert CLIENT_CERT
                         for TLS client authentication
   --debug               enable debug

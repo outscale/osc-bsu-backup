@@ -37,7 +37,7 @@ def main():
     logger.info("osc_bsu_backup: %s", __version__)
 
     parser = argparse.ArgumentParser(
-        description="osc-ebs-backup: {}".format(__version__)
+        description="osc-bsu-backup: {}".format(__version__)
     )
     parser.add_argument(
         "--instance-by-id",
