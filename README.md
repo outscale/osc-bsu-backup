@@ -7,7 +7,7 @@ cli tool to easily schedule instance snapshots and rotate it on Outscale Cloud
 ## Install
 
 ```bash
-python3 setup.py install
+pip install osc-bsu-backup
 ```
 
 ## How to build
