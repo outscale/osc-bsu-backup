@@ -1,5 +1,6 @@
 import unittest
-import osc_bsu_backup.error as error
+
+from osc_bsu_backup import error
 
 
 class TestErrorMethods(unittest.TestCase):

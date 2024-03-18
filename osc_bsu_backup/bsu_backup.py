@@ -1,8 +1,13 @@
-import botocore
+from datetime import datetime, timezone
+from typing import Optional
+
 import boto3
-from datetime import datetime, timezone, timedelta
-from osc_bsu_backup.utils import setup_logging
+import botocore
+from mypy_boto3_ec2.client import EC2Client
+from mypy_boto3_ec2.type_defs import FilterTypeDef, SnapshotResponseTypeDef
+
 from osc_bsu_backup.error import InputError
+from osc_bsu_backup.utils import setup_logging
 
 logger = setup_logging(__name__)
 
@@ -10,26 +15,30 @@ DESCRIPTION = "osc-bsu-backup EF50CF3A80164A5EABAF8C78B2314C65"
 OLD_DESCRIPTION = ["osc-bsu-backup 0.1", "osc-bsu-backup 0.0.2", "osc-bsu-backup 0.0.1"]
 
 
-def auth(profile, region, client_cert=None, endpoint=None):
-    default_region = ["us-east-2", "eu-west-2", "cn-southeast-1", "us-west-1"]
+def auth(
+    profile: Optional[str] = None,
+    region: Optional[str] = None,
+    client_cert: Optional[str] = None,
+    endpoint: Optional[str] = None,
+) -> EC2Client:
+    default_region = [
+        "us-east-2",
+        "eu-west-2",
+        "ap-northeast-1",
+        "us-west-1",
+        "cloudgouv-west-1",
+    ]
 
     if not endpoint and region in default_region:
-        if region == "cn-southeast-1":
-            endpoint = "https://fcu.{}.outscale.hk".format(region)
-        else:
-            endpoint = "https://fcu.{}.outscale.com".format(region)
+        endpoint = f"https://fcu.{region}.outscale.com"
     elif not endpoint and region not in default_region:
         raise InputError(
-            "You must specify an endpoint when the region is not : {}".format(
-                default_region
-            )
+            f"You must specify an endpoint when the region is not : {default_region}"
         )
-    else:
-        endpoint = endpoint
 
-    logger.info("region: {}".format(region))
-    logger.info("endpoint: {}".format(endpoint))
-    logger.info("profile: {}".format(profile))
+    logger.info("region: %s", region)
+    logger.info("endpoint: %s", endpoint)
+    logger.info("profile: %s", profile)
 
     logger.info("authenticate: %s %s", region, endpoint)
 
@@ -49,11 +58,11 @@ def auth(profile, region, client_cert=None, endpoint=None):
     return conn
 
 
-def find_instance_by_id(conn, id):
-    logger.info("find the instance by id: %s", id)
+def find_instance_by_id(conn: EC2Client, instance_id: str) -> list[str]:
+    logger.info("find the instance by id: %s", instance_id)
 
-    volumes = []
-    reservations = conn.describe_instances(InstanceIds=[id])
+    volumes: list[str] = []
+    reservations = conn.describe_instances(InstanceIds=[instance_id])
 
     if reservations:
         for reservation in reservations["Reservations"]:
@@ -69,23 +78,24 @@ def find_instance_by_id(conn, id):
                     )
                     volumes.append(vol["Ebs"]["VolumeId"])
     else:
-        logger.warning("instance not found: %s", id)
+        logger.warning("instance not found: %s", instance_id)
 
     return volumes
 
 
-def find_instances_by_tags(conn, tags):
+def find_instances_by_tags(conn: EC2Client, tags: list) -> list[str]:
     logger.info("find the instance by tags: %s", tags)
 
-    volumes = []
-    filters = [
+    volumes: list[str] = []
+
+    filters: list[FilterTypeDef] = [
         {"Name": "instance-state-name", "Values": ["running", "stopped"]},
     ]
 
     for tag in tags:
         tag_key = tag.split(":")[0]
         tag_value = tag.split(":")[1]
-        filters.append({"Name": "tag:{}".format(tag_key), "Values": [tag_value]})
+        filters.append({"Name": f"tag:{tag_key}", "Values": [tag_value]})
 
     reservations = conn.describe_instances(Filters=filters)
 
@@ -108,58 +118,60 @@ def find_instances_by_tags(conn, tags):
     return volumes
 
 
-def find_volumes_by_tags(conn, tags):
+def find_volumes_by_tags(conn: EC2Client, tags: list[str]) -> list[str]:
     logger.info("find the volume by tags: %s", tags)
 
-    volumes = []
-    filters = []
+    volumes: list[str] = []
+    filters: list[FilterTypeDef] = []
 
     for tag in tags:
         tag_key = tag.split(":")[0]
         tag_value = tag.split(":")[1]
-        filters.append({"Name": "tag:{}".format(tag_key), "Values": [tag_value]})
+        filters.append({"Name": f"tag:{tag_key}", "Values": [tag_value]})
 
     vol = conn.describe_volumes(Filters=filters)
 
     if len(vol["Volumes"]) != 0:
-        for vol in vol["Volumes"]:
-            logger.info("volume found: %s %s", vol["VolumeId"], vol["Tags"])
-            volumes.append(vol["VolumeId"])
+        for v in vol["Volumes"]:
+            logger.info("volume found: %s %s", v["VolumeId"], v["Tags"])
+            if v.get("VolumeId"):
+                volumes.append(v["VolumeId"])
     else:
         logger.warning("volumes not found: %s", tags)
 
     return volumes
 
 
-def find_volume_by_id(conn, id):
-    logger.info("find the volume by id: %s", id)
+def find_volume_by_id(conn: EC2Client, volume_id: str) -> list[str]:
+    logger.info("find the volume by id: %s", volume_id)
 
-    volumes = []
-    vol = conn.describe_volumes(VolumeIds=[id])
+    volumes: list[str] = []
+    vol = conn.describe_volumes(VolumeIds=[volume_id])
 
     if len(vol["Volumes"]) != 0:
-        for vol in vol["Volumes"]:
-            logger.info("volume found: %s %s", vol["VolumeId"], vol["Tags"])
-            volumes.append(vol["VolumeId"])
+        for v in vol["Volumes"]:
+            logger.info("volume found: %s %s", v["VolumeId"], v["Tags"])
+            volumes.append(v["VolumeId"])
     else:
-        logger.warning("volumes not found: %s", id)
+        logger.warning("volumes not found: %s", volume_id)
 
     return volumes
 
 
-def rotate_snapshots(conn, volumes, rotate=10, rotate_only=False):
+def rotate_snapshots(
+    conn: EC2Client, volumes: list[str], rotate: int = 10, rotate_only: bool = False
+) -> None:
     logger.info("rotate_snapshot: %d", rotate)
-    del_snaps = []
 
     for vol in volumes:
-        filters = [{"Name": "volume-id", "Values": [vol]}]
+        filters: list[FilterTypeDef] = [{"Name": "volume-id", "Values": [vol]}]
         if rotate_only:
             filters.append(
                 {"Name": "description", "Values": [DESCRIPTION] + OLD_DESCRIPTION}
             )
         snaps = conn.describe_snapshots(Filters=filters)
 
-        if len(snaps["Snapshots"]) >= rotate and rotate >= 1:
+        if len(snaps["Snapshots"]) >= rotate >= 1:
             snaps["Snapshots"].sort(key=lambda x: x["StartTime"], reverse=True)
 
             for i, snap in enumerate(snaps["Snapshots"], start=0):
@@ -172,7 +184,7 @@ def rotate_snapshots(conn, volumes, rotate=10, rotate_only=False):
                     )
 
                     try:
-                        del_snap = conn.delete_snapshot(SnapshotId=snap["SnapshotId"])
+                        conn.delete_snapshot(SnapshotId=snap["SnapshotId"])
                     except botocore.exceptions.ClientError as e:
                         if e.response["Error"]["Code"] == "InvalidSnapshot.InUse":
                             logger.error(e)
@@ -187,19 +199,20 @@ def rotate_snapshots(conn, volumes, rotate=10, rotate_only=False):
                     )
 
 
-def rotate_days_snapshots(conn, volumes, rotate=10, rotate_only=False):
+def rotate_days_snapshots(
+    conn: EC2Client, volumes: list[str], rotate: int = 10, rotate_only: bool = False
+) -> None:
     logger.info("rotate_snapshot: older than %d days", rotate)
-    del_snaps = []
 
     for vol in volumes:
-        filters = [{"Name": "volume-id", "Values": [vol]}]
+        filters: list[FilterTypeDef] = [{"Name": "volume-id", "Values": [vol]}]
         if rotate_only:
             filters.append(
                 {"Name": "description", "Values": [DESCRIPTION] + OLD_DESCRIPTION}
             )
         snaps = conn.describe_snapshots(Filters=filters)
 
-        if len(snaps["Snapshots"]) >= rotate and rotate >= 1:
+        if len(snaps["Snapshots"]) >= rotate >= 1:
             snaps["Snapshots"].sort(key=lambda x: x["StartTime"], reverse=True)
 
             for snap in snaps["Snapshots"]:
@@ -212,7 +225,7 @@ def rotate_days_snapshots(conn, volumes, rotate=10, rotate_only=False):
                     )
 
                     try:
-                        del_snap = conn.delete_snapshot(SnapshotId=snap["SnapshotId"])
+                        conn.delete_snapshot(SnapshotId=snap["SnapshotId"])
                     except botocore.exceptions.ClientError as e:
                         if e.response["Error"]["Code"] == "InvalidSnapshot.InUse":
                             logger.error(e)
@@ -227,10 +240,12 @@ def rotate_days_snapshots(conn, volumes, rotate=10, rotate_only=False):
                     )
 
 
-def create_snapshots(conn, volumes, copy_tags=False):
+def create_snapshots(
+    conn: EC2Client, volumes: list[str], copy_tags: bool = False
+) -> None:
     logger.info("create_snapshot")
 
-    snaps = []
+    snaps: list[SnapshotResponseTypeDef] = []
 
     for vol in volumes:
         snap = conn.create_snapshot(Description=DESCRIPTION, VolumeId=vol)

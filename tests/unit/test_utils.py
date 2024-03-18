@@ -1,6 +1,7 @@
-import unittest
-import osc_bsu_backup.utils as utils
 import logging
+import unittest
+
+from osc_bsu_backup import utils
 
 
 class TestUtilsMethods(unittest.TestCase):
@@ -11,7 +12,9 @@ class TestUtilsMethods(unittest.TestCase):
         logging.disable(logging.NOTSET)
 
     def test_setup_logging1(self):
-        self.assertIsInstance(utils.setup_logging(), logging.RootLogger)
+        with self.assertRaises(TypeError):
+            # pylint: disable=no-value-for-parameter
+            utils.setup_logging()
 
     def test_setup_logging2(self):
         self.assertIsInstance(utils.setup_logging("aaa"), logging.Logger)

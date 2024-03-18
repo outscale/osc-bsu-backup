@@ -1,14 +1,33 @@
 import argparse
 import logging
-import osc_bsu_backup.bsu_backup as bsu_backup
-from osc_bsu_backup.utils import setup_logging
+from dataclasses import dataclass
+from typing import Optional
 
-from osc_bsu_backup import __version__
+from osc_bsu_backup import __version__, bsu_backup
+from osc_bsu_backup.utils import setup_logging
 
 logger = setup_logging(__name__)
 
 
-def backup(args):
+@dataclass
+# pylint: disable=too-many-instance-attributes
+class Args:
+    instance_id: Optional[str]
+    instances_tags: Optional[list[str]]
+    volume_id: Optional[str]
+    volumes_tags: Optional[list[str]]
+    rotate: Optional[int]
+    rotate_days: Optional[int]
+    rotate_only: bool
+    copy_tags: bool
+    region: str
+    endpoint: Optional[str]
+    profile: Optional[str]
+    client_cert: Optional[str]
+    debug: bool
+
+
+def backup(args: Args) -> None:
     conn = bsu_backup.auth(args.profile, args.region, args.client_cert, args.endpoint)
 
     if args.instance_id:
@@ -33,12 +52,10 @@ def backup(args):
         bsu_backup.create_snapshots(conn, res, args.copy_tags)
 
 
-def main():
+def main() -> None:
     logger.info("osc_bsu_backup: %s", __version__)
 
-    parser = argparse.ArgumentParser(
-        description="osc-bsu-backup: {}".format(__version__)
-    )
+    parser = argparse.ArgumentParser(description=f"osc-bsu-backup: {__version__}")
     parser.add_argument(
         "--instance-by-id",
         dest="instance_id",
@@ -107,7 +124,7 @@ def main():
         action="store",
         default=None,
         help="aws profile to use, ~/.aws/credentials. Don't set to use environment variables",
-    ),
+    )
     parser.add_argument(
         "--client-cert",
         dest="client_cert",
@@ -118,7 +135,7 @@ def main():
     parser.add_argument(
         "--debug", dest="debug", action="store_true", default=False, help="enable debug"
     )
-    args = parser.parse_args()
+    args = Args(**vars(parser.parse_args()))
 
     if args.instances_tags:
         for tag in args.instances_tags:
@@ -138,6 +155,7 @@ def main():
         and not args.volume_id
         and not args.volumes_tags
     ):
+        # pylint: disable=line-too-long
         parser.error(
             "please use --instance-by-id or --instances-by-tags or --volume-by-id or --volumes-by-tags"
         )
@@ -145,9 +163,9 @@ def main():
         parser.error("you can't use rotate and rotate-by-days")
 
     if args.debug:
-        setup_logging(level=logging.DEBUG)
+        setup_logging(name=__name__, level=logging.DEBUG)
 
-    return backup(args)
+    backup(args)
 
 
 if __name__ == "__main__":

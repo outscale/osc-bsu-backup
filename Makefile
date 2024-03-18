@@ -5,22 +5,31 @@ VERSION=$$(git describe --abbrev=0 --tags)
 PWD=$$(pwd)
 
 virtualenv:
-	$(PYTHON3) -m venv venv
+	test -d ./venv || $(PYTHON3) -m venv venv
 
 clean:
 	rm -rf venv dist build osc_bsu_backup.egg-info
 
 develop: virtualenv
-	./venv/bin/python setup.py develop
+	./venv/bin/pip install -e .
 
-unit: virtualenv format develop
+unit: virtualenv format isort mypy develop pylint
 	./venv/bin/python -m unittest -f -v $$(ls tests/unit/test_*.py)
 
-integration: virtualenv format develop
+integration: virtualenv format isort mypy develop pylint
 	./venv/bin/python -m unittest -f -v $$(ls tests/integration/test_*.py)
 
 wheel: virtualenv
 	./venv/bin/pip install wheel && ./venv/bin/python setup.py bdist_wheel
+
+pylint: virtualenv
+	./venv/bin/pip install pylint && ./venv/bin/pylint --disable=C0111 $(PYTHONFILES) && ./venv/bin/pylint --disable=C0111 $(PYTHONUTESTFILES)
+
+mypy: virtualenv
+	./venv/bin/pip install mypy "boto3-stubs[essential]" && ./venv/bin/mypy $(PYTHONFILES)
+
+isort: virtualenv
+	./venv/bin/pip install isort && ./venv/bin/isort $(PYTHONFILES) && ./venv/bin/isort $(PYTHONUTESTFILES)
 
 format: virtualenv 
 	./venv/bin/pip install black && ./venv/bin/black $(PYTHONFILES) && ./venv/bin/black $(PYTHONUTESTFILES)

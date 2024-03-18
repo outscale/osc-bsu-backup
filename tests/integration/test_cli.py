@@ -1,12 +1,13 @@
-import unittest
+import dataclasses
 import logging
+import unittest
+import warnings
 from unittest.mock import patch
-import osc_bsu_backup.cli as cli
-import osc_bsu_backup.bsu_backup as bsu_backup
+
 import boto3
 import botocore
-import sys
-import warnings
+
+from osc_bsu_backup import cli
 
 
 class TestIntegrationMethods(unittest.TestCase):
@@ -67,32 +68,34 @@ class TestIntegrationMethods(unittest.TestCase):
 
         logging.disable(logging.NOTSET)
 
-    def setUpVolumes(self):
-        self.vol1 = self.conn.create_volume(
+    def setup_volumes(self):
+        vol1 = self.conn.create_volume(
             AvailabilityZone=self.region + "a", Size=10, VolumeType="standard"
         )
-        self.conn.get_waiter("volume_available").wait(VolumeIds=[self.vol1["VolumeId"]])
+        self.conn.get_waiter("volume_available").wait(VolumeIds=[vol1["VolumeId"]])
         self.conn.create_tags(
-            Resources=[self.vol1["VolumeId"]],
+            Resources=[vol1["VolumeId"]],
             Tags=[
                 {"Key": "Name", "Value": "osc_bsu_backup_27aaade4"},
                 {"Key": "test2", "Value": "osc_bsu_backup_27aaade4"},
             ],
         )
 
-        self.vol2 = self.conn.create_volume(
+        vol2 = self.conn.create_volume(
             AvailabilityZone=self.region + "a", Size=10, VolumeType="standard"
         )
-        self.conn.get_waiter("volume_available").wait(VolumeIds=[self.vol2["VolumeId"]])
+        self.conn.get_waiter("volume_available").wait(VolumeIds=[vol2["VolumeId"]])
         self.conn.create_tags(
-            Resources=[self.vol2["VolumeId"]],
+            Resources=[vol2["VolumeId"]],
             Tags=[
                 {"Key": "Name", "Value": "osc_bsu_backup_27aaade4"},
                 {"Key": "test2", "Value": "osc_bsu_backup_27aaade4"},
             ],
         )
 
-    def setUpInstances(self, count=1):
+        return vol1, vol2
+
+    def setup_instances(self, count=1):
         centos = self.conn.describe_images(
             Filters=[
                 {"Name": "owner-alias", "Values": ["Outscale"]},
@@ -100,7 +103,7 @@ class TestIntegrationMethods(unittest.TestCase):
             ]
         )
 
-        self.vm1 = self.conn.run_instances(
+        vm1 = self.conn.run_instances(
             InstanceType="tinav4.c1r1p3",
             ImageId=centos["Images"][0]["ImageId"],
             KeyName="osc_bsu_backup_27aaade4",
@@ -109,21 +112,24 @@ class TestIntegrationMethods(unittest.TestCase):
         )
 
         self.conn.get_waiter("instance_running").wait(
-            InstanceIds=[i["InstanceId"] for i in self.vm1["Instances"]]
+            InstanceIds=[i["InstanceId"] for i in vm1["Instances"]]
         )
         self.conn.create_tags(
-            Resources=[i["InstanceId"] for i in self.vm1["Instances"]],
+            Resources=[i["InstanceId"] for i in vm1["Instances"]],
             Tags=[
                 {"Key": "Name", "Value": "osc_bsu_backup_27aaade4"},
                 {"Key": "test2", "Value": "osc_bsu_backup_27aaade4"},
             ],
         )
 
-    def test_integration_volume_id(self):
-        self.setUpVolumes()
+        return vm1
 
-        class args(object):
-            volume_id = self.vol1["VolumeId"]
+    def test_integration_volume_id(self):
+        vol1, _ = self.setup_volumes()
+
+        @dataclasses.dataclass
+        class Args:
+            volume_id = vol1["VolumeId"]
             instance_id = None
             instances_tags = None
             volumes_tags = None
@@ -137,28 +143,29 @@ class TestIntegrationMethods(unittest.TestCase):
             copy_tags = False
 
         with patch("osc_bsu_backup.bsu_backup.DESCRIPTION", "osc_bsu_backup_27aaade4"):
-            self.assertIsNone(cli.backup(args()))
+            self.assertIsNone(cli.backup(Args()))
             snaps = self.conn.describe_snapshots(
                 Filters=[{"Name": "description", "Values": ["osc_bsu_backup_27aaade4"]}]
             )
             self.assertEqual(len(snaps["Snapshots"]), 1)
 
-            self.assertIsNone(cli.backup(args()))
+            self.assertIsNone(cli.backup(Args()))
             snaps = self.conn.describe_snapshots(
                 Filters=[{"Name": "description", "Values": ["osc_bsu_backup_27aaade4"]}]
             )
             self.assertEqual(len(snaps["Snapshots"]), 2)
 
-            self.assertIsNone(cli.backup(args()))
+            self.assertIsNone(cli.backup(Args()))
             snaps = self.conn.describe_snapshots(
                 Filters=[{"Name": "description", "Values": ["osc_bsu_backup_27aaade4"]}]
             )
             self.assertEqual(len(snaps["Snapshots"]), 2)
 
     def test_integration_volume_tags1(self):
-        self.setUpVolumes()
+        self.setup_volumes()
 
-        class args(object):
+        @dataclasses.dataclass
+        class Args:
             volume_id = None
             instance_id = None
             instances_tags = None
@@ -176,30 +183,31 @@ class TestIntegrationMethods(unittest.TestCase):
             copy_tags = False
 
         with patch("osc_bsu_backup.bsu_backup.DESCRIPTION", "osc_bsu_backup_27aaade4"):
-            self.assertIsNone(cli.backup(args()))
+            self.assertIsNone(cli.backup(Args()))
             snaps = self.conn.describe_snapshots(
                 Filters=[{"Name": "description", "Values": ["osc_bsu_backup_27aaade4"]}]
             )
             self.assertEqual(len(snaps["Snapshots"]), 2)
 
-            self.assertIsNone(cli.backup(args()))
+            self.assertIsNone(cli.backup(Args()))
             snaps = self.conn.describe_snapshots(
                 Filters=[{"Name": "description", "Values": ["osc_bsu_backup_27aaade4"]}]
             )
             self.assertEqual(len(snaps["Snapshots"]), 4)
 
-            self.assertIsNone(cli.backup(args()))
+            self.assertIsNone(cli.backup(Args()))
             snaps = self.conn.describe_snapshots(
                 Filters=[{"Name": "description", "Values": ["osc_bsu_backup_27aaade4"]}]
             )
             self.assertEqual(len(snaps["Snapshots"]), 4)
 
     def test_integration_instance_id(self):
-        self.setUpInstances(count=1)
+        vm1 = self.setup_instances(count=1)
 
-        class args(object):
+        @dataclasses.dataclass
+        class Args:
             volume_id = None
-            instance_id = self.vm1["Instances"][0]["InstanceId"]
+            instance_id = vm1["Instances"][0]["InstanceId"]
             instances_tags = None
             volumes_tags = None
             profile = None
@@ -212,28 +220,29 @@ class TestIntegrationMethods(unittest.TestCase):
             copy_tags = False
 
         with patch("osc_bsu_backup.bsu_backup.DESCRIPTION", "osc_bsu_backup_27aaade4"):
-            self.assertIsNone(cli.backup(args()))
+            self.assertIsNone(cli.backup(Args()))
             snaps = self.conn.describe_snapshots(
                 Filters=[{"Name": "description", "Values": ["osc_bsu_backup_27aaade4"]}]
             )
             self.assertEqual(len(snaps["Snapshots"]), 1)
 
-            self.assertIsNone(cli.backup(args()))
+            self.assertIsNone(cli.backup(Args()))
             snaps = self.conn.describe_snapshots(
                 Filters=[{"Name": "description", "Values": ["osc_bsu_backup_27aaade4"]}]
             )
             self.assertEqual(len(snaps["Snapshots"]), 2)
 
-            self.assertIsNone(cli.backup(args()))
+            self.assertIsNone(cli.backup(Args()))
             snaps = self.conn.describe_snapshots(
                 Filters=[{"Name": "description", "Values": ["osc_bsu_backup_27aaade4"]}]
             )
             self.assertEqual(len(snaps["Snapshots"]), 2)
 
     def test_integration_instance_tags(self):
-        self.setUpInstances(count=4)
+        self.setup_instances(count=4)
 
-        class args(object):
+        @dataclasses.dataclass
+        class Args:
             volume_id = None
             instance_id = None
             instances_tags = ["test2:osc_bsu_backup_27aaade4"]
@@ -248,28 +257,29 @@ class TestIntegrationMethods(unittest.TestCase):
             copy_tags = False
 
         with patch("osc_bsu_backup.bsu_backup.DESCRIPTION", "osc_bsu_backup_27aaade4"):
-            self.assertIsNone(cli.backup(args()))
+            self.assertIsNone(cli.backup(Args()))
             snaps = self.conn.describe_snapshots(
                 Filters=[{"Name": "description", "Values": ["osc_bsu_backup_27aaade4"]}]
             )
             self.assertEqual(len(snaps["Snapshots"]), 4)
 
-            self.assertIsNone(cli.backup(args()))
+            self.assertIsNone(cli.backup(Args()))
             snaps = self.conn.describe_snapshots(
                 Filters=[{"Name": "description", "Values": ["osc_bsu_backup_27aaade4"]}]
             )
             self.assertEqual(len(snaps["Snapshots"]), 8)
 
-            self.assertIsNone(cli.backup(args()))
+            self.assertIsNone(cli.backup(Args()))
             snaps = self.conn.describe_snapshots(
                 Filters=[{"Name": "description", "Values": ["osc_bsu_backup_27aaade4"]}]
             )
             self.assertEqual(len(snaps["Snapshots"]), 8)
 
     def test_integration_copy_tags(self):
-        self.setUpVolumes()
+        self.setup_volumes()
 
-        class args(object):
+        @dataclasses.dataclass
+        class Args:
             volume_id = None
             instance_id = None
             instances_tags = None
@@ -287,7 +297,7 @@ class TestIntegrationMethods(unittest.TestCase):
             copy_tags = True
 
         with patch("osc_bsu_backup.bsu_backup.DESCRIPTION", "osc_bsu_backup_27aaade4"):
-            self.assertIsNone(cli.backup(args()))
+            self.assertIsNone(cli.backup(Args()))
             snaps = self.conn.describe_snapshots(
                 Filters=[{"Name": "description", "Values": ["osc_bsu_backup_27aaade4"]}]
             )

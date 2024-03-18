@@ -1,15 +1,15 @@
-import unittest
 import logging
+import unittest
+from datetime import datetime, timezone
 from unittest.mock import patch
-import boto3
+
 import botocore.session
 from botocore.stub import Stubber
-import json
-import os
+
 import osc_bsu_backup.bsu_backup as bsu
-from osc_bsu_backup.error import InputError
+# pylint: disable=import-error
 import tests.unit.fixtures_bsu_backup as fixtures
-from datetime import datetime, timezone
+from osc_bsu_backup.error import InputError
 
 
 class TestBsuBackup(unittest.TestCase):
@@ -88,7 +88,7 @@ class TestBsuBackup(unittest.TestCase):
                 "describe_volumes", {"Volumes": []}, {"VolumeIds": ["vol-a24fffda"]}
             )
             for i in bsu.find_volume_by_id(self.ec2, "vol-a24fffda"):
-                assertEqual(i, None)
+                self.assertEqual(i, None)
 
     def test_find_volumes_by_tags1(self):
         with Stubber(self.ec2) as stubber:

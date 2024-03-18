@@ -1,10 +1,11 @@
-import unittest
 import logging
-
-from unittest.mock import patch
-import osc_bsu_backup.cli as cli
 import sys
+import unittest
+from unittest.mock import patch
+
 import botocore
+
+from osc_bsu_backup import cli
 
 
 class TestCliMethods(unittest.TestCase):
