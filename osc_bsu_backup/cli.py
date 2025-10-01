@@ -25,6 +25,7 @@ class Args:
     profile: Optional[str]
     client_cert: Optional[str]
     debug: bool
+    version: bool
 
 
 def backup(args: Args) -> None:
@@ -53,7 +54,6 @@ def backup(args: Args) -> None:
 
 
 def main() -> None:
-    logger.info("osc_bsu_backup: %s", __version__)
 
     parser = argparse.ArgumentParser(description=f"osc-bsu-backup: {__version__}")
     parser.add_argument(
@@ -135,8 +135,20 @@ def main() -> None:
     parser.add_argument(
         "--debug", dest="debug", action="store_true", default=False, help="enable debug"
     )
+    parser.add_argument(
+        "--version",
+        dest="version",
+        action="store_true",
+        default=False,
+        help="Show script version and exit"
+    )
     args = Args(**vars(parser.parse_args()))
 
+    if args.version:
+        print(f"osc-bsu-backup version {__version__}")
+        exit(0)
+
+    logger.info("osc_bsu_backup: %s", __version__)
     if args.instances_tags:
         for tag in args.instances_tags:
             if len(tag.split(":")) != 2:
