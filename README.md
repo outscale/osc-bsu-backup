@@ -23,6 +23,29 @@ make develop
 make unit
 ```
 
+## Development
+
+### Editable Mode
+
+Install the CLI in editable mode with development dependencies
+
+```bash
+# Clone the repository
+git clone https://github.com/outscale/osc-bsu-backup.git
+cd osc-bsu-backup
+
+# Create and activate a virtual environment
+python -m venv venv
+source venv/bin/activate
+
+# CLI in editable mode
+pip install -e ".[dev]"
+or 
+python3 setup.py develop
+```
+
+Changes in the `osc_bsu_backup/` directory will be immediately reflected without reinstalling.
+
 ```bash
 #you must have an account on the region eu-west-2 from Outscale
 #~/.aws/credentials

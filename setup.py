@@ -14,6 +14,7 @@ setup(
         'console_scripts': ['osc-bsu-backup = osc_bsu_backup.cli:main']
     },
     install_requires=[
-        'boto3'
+        'boto3',
+        'mypy_boto3_ec2'
     ]
 )
