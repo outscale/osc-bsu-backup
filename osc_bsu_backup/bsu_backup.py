@@ -26,7 +26,7 @@ def auth(
         "eu-west-2",
         "ap-northeast-1",
         "us-west-1",
-        "cloudgouv-west-1",
+        "cloudgouv-eu-west-1",
     ]
 
     if not endpoint and region in default_region:
